@@ -1,0 +1,63 @@
+<%- include('../partials/header') %>
+
+<div class="page-hero">
+  <div class="page-hero-bg">
+    <img src="https://images.unsplash.com/photo-1613977257363-707ba9348227?w=1400&q=80" alt="Our Listings">
+  </div>
+  <div class="page-hero-overlay"></div>
+  <div class="page-hero-content"><h1>Our Listings</h1></div>
+</div>
+
+<section class="section">
+  <div class="container">
+    <div class="section-header text-center mb-48">
+      <span class="section-label">Explore</span>
+      <h2>Featured Listings</h2>
+    </div>
+    <div class="listings-grid-3">
+      <% if (listings && listings.length > 0) { %>
+        <% listings.forEach(listing => { %>
+          <%- include('../partials/listing-card', { listing }) %>
+        <% }) %>
+      <% } else { %>
+        <div style="grid-column:1/-1;text-align:center;padding:80px 0;color:var(--text-light);">
+          <i class="fas fa-home" style="font-size:48px;color:var(--cream-dark);margin-bottom:16px;display:block;"></i>
+          <p>No listings available at this time. Please check back soon.</p>
+        </div>
+      <% } %>
+    </div>
+
+    <% if (totalPages > 1) { %>
+    <div class="pagination">
+      <% if (page > 1) { %><a href="/listings?page=<%= page-1 %>" class="page-btn arrow">&#8592;</a><% } %>
+      <% for (let i = 1; i <= totalPages; i++) { %>
+        <a href="/listings?page=<%= i %>" class="page-btn <%= i === page ? 'active' : '' %>"><%= i %></a>
+      <% } %>
+      <% if (page < totalPages) { %><a href="/listings?page=<%= page+1 %>" class="page-btn arrow">&#8594;</a><% } %>
+    </div>
+    <% } %>
+  </div>
+</section>
+
+<section class="cta-section">
+  <div class="container">
+    <div class="cta-inner">
+      <div>
+        <span class="section-label">Expand Your Search</span>
+        <h2>Start Your Property Search</h2>
+      </div>
+      <a href="/home-search" class="btn btn-primary btn-lg">Browse Properties</a>
+    </div>
+  </div>
+</section>
+
+<section class="work-with" style="background-image:url('https://images.unsplash.com/photo-1570168007204-dfb528c6958f?w=1400&q=70');">
+  <div class="work-with-overlay"></div>
+  <div class="container work-with-content">
+    <h2>Work With Rajivan</h2>
+    <p>With a passion for real estate and years of experience in sales and negotiation, Rajivan ensures that every client gets top-tier service.</p>
+    <a href="/contact" class="btn btn-primary btn-lg mt-32">Let's Connect</a>
+  </div>
+</section>
+
+<%- include('../partials/footer') %>

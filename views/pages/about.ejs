@@ -1,0 +1,121 @@
+<%- include('../partials/header') %>
+
+<!-- PAGE HERO -->
+<div class="page-hero">
+  <div class="page-hero-bg">
+    <img src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=1400&q=80" alt="About Rajivan">
+  </div>
+  <div class="page-hero-overlay"></div>
+  <div class="page-hero-content">
+    <h1>About Rajivan</h1>
+  </div>
+</div>
+
+<!-- MEET SECTION -->
+<section class="section">
+  <div class="container">
+    <div class="meet-grid">
+      <div class="meet-photo">
+        <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?w=600&q=80" alt="Rajivan Varatharajah – Real Estate Agent">
+      </div>
+      <div class="meet-content">
+        <span class="section-label">My Story</span>
+        <h2>Meet Rajivan</h2>
+        <p>Rajivan Varatharajah is a dedicated real estate professional committed to helping clients navigate the buying and selling process with confidence. With years of experience in sales leadership and expert negotiation skills, Rajivan brings a strategic, client-focused approach to every transaction.</p>
+        <p style="margin-top:16px;">Deeply rooted in the Bastrop community, he is passionate about service and actively gives back through volunteer efforts and nonprofit work. Whether you're buying your first home, selling your property, or investing in Central Texas real estate, Rajivan is ready to put his experience and dedication to work for you.</p>
+        <p style="margin-top:16px;">His commitment is simple: every client deserves top-tier service, honest communication, and results they can be proud of.</p>
+        <div class="meet-card">
+          <div class="meet-card-name">RAJIVAN VARATHARAJAH</div>
+          <div class="meet-card-title">Real Estate Agent</div>
+          <div class="meet-card-details">
+            <div><span>PHONE</span><a href="tel:+16471234567">+1 (647) 123-4567</a></div>
+            <div><span>EMAIL</span><a href="mailto:rajivan@realestate.com">rajivan@realestate.com</a></div>
+            <div><span>LICENSE</span><span>TREC #0000000</span></div>
+          </div>
+          <div class="footer-social" style="margin-top:16px;">
+            <a href="#"><i class="fab fa-facebook-f"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+            <a href="#"><i class="fab fa-linkedin-in"></i></a>
+            <a href="#"><i class="fab fa-youtube"></i></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS PREVIEW -->
+<section class="section bg-cream">
+  <div class="container">
+    <div class="section-header text-center mb-48">
+      <span class="section-label">What Clients Say</span>
+      <h2>Testimonials</h2>
+    </div>
+    <div style="max-width:700px;margin:0 auto;text-align:center;">
+      <div style="font-size:48px;color:var(--gold);margin-bottom:16px;">"</div>
+      <p style="font-size:18px;font-style:italic;color:var(--text-mid);line-height:1.8;font-family:var(--font-display);">
+        Rajivan is a REALLY SMART guy. He knows his market very well. He will give advice if asked — he is highly ethical and he communicates professionally.
+      </p>
+      <div style="margin-top:24px;font-size:12px;letter-spacing:0.15em;text-transform:uppercase;color:var(--gold);font-weight:700;">— Darryl N.</div>
+      <a href="/testimonials" class="btn btn-primary mt-32">View All Testimonials</a>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURED PROPERTIES -->
+<section class="section">
+  <div class="container">
+    <div class="section-header text-center mb-48">
+      <span class="section-label">Explore My Portfolio</span>
+      <h2>Featured Properties</h2>
+    </div>
+    <div id="aboutListings" class="listings-grid-3">
+      <div class="listing-card skeleton-card"></div>
+      <div class="listing-card skeleton-card"></div>
+      <div class="listing-card skeleton-card"></div>
+    </div>
+    <div class="text-center mt-48">
+      <a href="/listings" class="btn btn-primary">View All</a>
+    </div>
+  </div>
+</section>
+
+<!-- WORK WITH -->
+<section class="work-with" style="background-image:url('https://images.unsplash.com/photo-1570168007204-dfb528c6958f?w=1400&q=70');">
+  <div class="work-with-overlay"></div>
+  <div class="container work-with-content">
+    <span class="section-label">Get Started</span>
+    <h2>Work With Rajivan</h2>
+    <p>With a passion for real estate and years of experience in sales and negotiation, Rajivan ensures that every client gets top-tier service. Call him today to see how he can help you navigate the Bastrop real estate market with confidence.</p>
+    <a href="/contact" class="btn btn-primary btn-lg mt-32">Let's Connect</a>
+  </div>
+</section>
+
+<%- include('../partials/footer') %>
+
+<script>
+// Load featured listings dynamically
+// Load featured listings dynamically with proper image URL structures
+fetch('/api/listings?limit=3')
+  .then(r => r.json())
+  .then(data => {
+    const container = document.getElementById('aboutListings');
+    if (data.listings && data.listings.length > 0) {
+      container.innerHTML = data.listings.slice(0, 3).map(l => {
+        let img = l.images && l.images[0] ? l.images[0] : '/images/placeholder-home.jpg';
+        
+        if (img && !img.startsWith('http') && !img.startsWith('/')) {
+          img = `https://cdn.repliers.io/${img}`;
+        }
+        
+        const price = l.listPrice ? '$' + Number(l.listPrice).toLocaleString() : 'Price on Request';
+        const addr = l.address ? `${l.address.streetNumber || ''} ${l.address.streetName || ''}, ${l.address.city || ''}` : '';
+        
+        return `<a href="/listings/${l.mlsNumber || l.listingId}" class="listing-card">
+          <div class="listing-img-wrap"><img src="${img}" alt="${addr}" onerror="this.src='/images/placeholder-home.jpg'">
+          <div class="listing-badge badge-sale">For Sale</div></div>
+          <div class="listing-body"><div class="listing-price">${price}</div><div class="listing-address">${addr}</div></div></a>`;
+      }).join('');
+    }
+  }).catch(() => {});
+</script>

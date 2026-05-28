@@ -1,0 +1,41 @@
+<%- include('../partials/header') %>
+
+<div class="page-hero">
+  <div class="page-hero-bg">
+    <img src="https://images.unsplash.com/photo-1507679799987-c73779587ccf?w=1400&q=80" alt="Resources">
+  </div>
+  <div class="page-hero-overlay"></div>
+  <div class="page-hero-content"><h1>Resources</h1></div>
+</div>
+
+<section class="section bg-cream">
+  <div class="container">
+    <div class="section-header text-center mb-48">
+      <span class="section-label">Helpful Tools</span>
+      <h2>Everything You Need</h2>
+    </div>
+    <div class="listings-grid-3" style="gap:32px;">
+      <% const resources = [
+        { icon: 'fas fa-home', title: "Buyer's Guide", desc: 'Step-by-step guide to purchasing your dream home with confidence.', link: '/buyers-guide', cta: 'Read Guide' },
+        { icon: 'fas fa-tag', title: "Seller's Guide", desc: 'Everything you need to know to sell your home for maximum value.', link: '/sellers-guide', cta: 'Read Guide' },
+        { icon: 'fas fa-calculator', title: 'Mortgage Calculator', desc: 'Estimate your monthly payment and plan your purchase budget.', link: '/mortgage-calculator', cta: 'Calculate Now' },
+        { icon: 'fas fa-search', title: 'Home Search', desc: 'Browse all available listings in Bastrop and surrounding areas.', link: '/home-search', cta: 'Search Homes' },
+        { icon: 'fas fa-chart-bar', title: 'Home Valuation', desc: 'Get a free estimate of your home\'s current market value.', link: '/home-valuation', cta: 'Get Valuation' },
+        { icon: 'fas fa-map-marked-alt', title: 'Neighborhood Guides', desc: 'Explore the communities and areas where Rajivan specializes.', link: '/neighborhoods', cta: 'Explore Areas' },
+        { icon: 'fas fa-newspaper', title: 'Blog', desc: 'Market insights, tips, and real estate news for buyers and sellers.', link: '/blog', cta: 'Read Blog' },
+        { icon: 'fas fa-video', title: 'Vlog', desc: 'Video content covering the Bastrop market, properties, and more.', link: '/vlog', cta: 'Watch Videos' },
+        { icon: 'fas fa-phone', title: "Let's Connect", desc: 'Ready to start? Reach out to Rajivan directly for personalized help.', link: '/contact', cta: 'Contact Us' },
+      ] %>
+      <% resources.forEach(r => { %>
+      <div class="info-card">
+        <div class="info-card-icon"><i class="<%= r.icon %>"></i></div>
+        <h3><%= r.title %></h3>
+        <p><%= r.desc %></p>
+        <a href="<%= r.link %>" class="btn btn-outline mt-16"><%= r.cta %></a>
+      </div>
+      <% }) %>
+    </div>
+  </div>
+</section>
+
+<%- include('../partials/footer') %>

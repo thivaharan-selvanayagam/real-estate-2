@@ -1,0 +1,187 @@
+<%- include('../partials/header') %>
+
+<div style="padding-top:70px;" class="search-page-layout">
+  <div class="search-filters-panel">
+    <div class="search-filters-inner">
+      <h3 style="font-family:var(--font-display);font-size:22px;color:var(--navy);margin-bottom:24px;">Search Homes</h3>
+
+      <div class="filter-group">
+        <label class="filter-label">Location / ZIP</label>
+        <input type="text" id="filterSearch" class="filter-input" placeholder="City, neighborhood, ZIP...">
+      </div>
+      <div class="filter-group">
+        <label class="filter-label">Status</label>
+        <select id="filterStatus" class="filter-input">
+          <option value="">For Sale</option>
+          <option value="U">Under Contract</option>
+        </select>
+      </div>
+      <div class="filter-group">
+        <label class="filter-label">Min Price</label>
+        <select id="filterMinPrice" class="filter-input">
+          <option value="">Any</option>
+          <option value="100000">$100,000</option>
+          <option value="200000">$200,000</option>
+          <option value="300000">$300,000</option>
+          <option value="500000">$500,000</option>
+          <option value="750000">$750,000</option>
+          <option value="1000000">$1,000,000</option>
+        </select>
+      </div>
+      <div class="filter-group">
+        <label class="filter-label">Max Price</label>
+        <select id="filterMaxPrice" class="filter-input">
+          <option value="">Any</option>
+          <option value="200000">$200,000</option>
+          <option value="300000">$300,000</option>
+          <option value="500000">$500,000</option>
+          <option value="750000">$750,000</option>
+          <option value="1000000">$1,000,000</option>
+          <option value="2000000">$2,000,000+</option>
+        </select>
+      </div>
+      <div class="filter-group">
+        <label class="filter-label">Beds</label>
+        <select id="filterBeds" class="filter-input">
+          <option value="">Any</option>
+          <option value="1">1+</option>
+          <option value="2">2+</option>
+          <option value="3">3+</option>
+          <option value="4">4+</option>
+          <option value="5">5+</option>
+        </select>
+      </div>
+      <div class="filter-group">
+        <label class="filter-label">Baths</label>
+        <select id="filterBaths" class="filter-input">
+          <option value="">Any</option>
+          <option value="1">1+</option>
+          <option value="2">2+</option>
+          <option value="3">3+</option>
+        </select>
+      </div>
+      <div class="filter-group">
+        <label class="filter-label">Property Type</label>
+        <select id="filterType" class="filter-input">
+          <option value="">All Types</option>
+          <option value="residential">Residential</option>
+          <option value="condo">Condo</option>
+          <option value="land">Land</option>
+          <option value="commercial">Commercial</option>
+        </select>
+      </div>
+      <button class="btn btn-primary" style="width:100%;margin-top:8px;" onclick="runSearch()">
+        <i class="fas fa-search"></i> Search
+      </button>
+    </div>
+  </div>
+
+  <div class="search-results-panel">
+    <div class="search-results-header">
+      <div id="resultsCount" style="font-size:13px;color:var(--text-light);">Loading results...</div>
+      <div style="display:flex;gap:8px;align-items:center;">
+        <button class="page-btn" onclick="toggleView('list')" id="btnList" title="List view"><i class="fas fa-th-large"></i></button>
+        <button class="page-btn" onclick="toggleView('map')" id="btnMap" title="Map view"><i class="fas fa-map"></i></button>
+      </div>
+    </div>
+    <div id="listingsContainer" class="search-listings-grid"></div>
+    <div class="pagination" id="searchPagination"></div>
+  </div>
+</div>
+
+<%- include('../partials/footer') %>
+
+<script>
+let currentPage = 1;
+const urlParams = new URLSearchParams(window.location.search);
+if (urlParams.get('q')) document.getElementById('filterSearch').value = urlParams.get('q');
+if (urlParams.get('type')) document.getElementById('filterType').value = urlParams.get('type');
+
+function runSearch(page = 1) {
+  currentPage = page;
+  const params = new URLSearchParams({
+    q: document.getElementById('filterSearch').value,
+    minPrice: document.getElementById('filterMinPrice').value,
+    maxPrice: document.getElementById('filterMaxPrice').value,
+    beds: document.getElementById('filterBeds').value,
+    baths: document.getElementById('filterBaths').value,
+    type: document.getElementById('filterType').value,
+    page,
+    limit: 12,
+  });
+
+  document.getElementById('listingsContainer').innerHTML = '<div style="grid-column:1/-1;text-align:center;padding:60px;"><i class="fas fa-spinner fa-spin" style="font-size:32px;color:var(--gold);"></i></div>';
+
+  fetch('/api/listings?' + params)
+    .then(r => r.json())
+    .then(data => {
+      document.getElementById('resultsCount').textContent = `${data.count || 0} results`;
+      const container = document.getElementById('listingsContainer');
+      
+      if (!data.listings || data.listings.length === 0) {
+        container.innerHTML = '<div style="grid-column:1/-1;text-align:center;padding:80px 0;color:var(--text-light);"><i class="fas fa-home" style="font-size:48px;color:var(--cream-dark);margin-bottom:16px;display:block;"></i><p>No listings found. Try adjusting your filters.</p></div>';
+        return;
+      }
+      
+      container.innerHTML = data.listings.map(l => {
+        let img = l.images && l.images[0] ? l.images[0] : '/images/placeholder-home.jpg';
+        
+        // Prepend official CDN route if path arrives as a relative string parameter from API
+        if (img && !img.startsWith('http') && !img.startsWith('/')) {
+          img = `https://cdn.repliers.io/${img}`;
+        }
+        
+        const price = l.listPrice ? '$' + Number(l.listPrice).toLocaleString() : 'Price on Request';
+        
+        // Dynamic string compilation arrays eliminate redundant spacing or hanging characters
+        let addr = 'Address on Request';
+        if (l.address) {
+          const streetSegment = [l.address.streetNumber, l.address.streetName].filter(Boolean).join(' ');
+          addr = [streetSegment, l.address.city].filter(Boolean).join(', ');
+        }
+
+        const beds = l.details?.numBedrooms || l.bedrooms || '–';
+        const baths = l.details?.numBathrooms || l.bathrooms || '–';
+        const status = l.status || 'A';
+        const badgeClass = status === 'A' ? 'badge-sale' : 'badge-contract';
+        const badgeText = status === 'A' ? 'For Sale' : 'Under Contract';
+
+        return `<a href="/listings/${l.mlsNumber || l.listingId}" class="listing-card">
+          <div class="listing-img-wrap">
+            <img src="${img}" alt="${addr}" onerror="this.src='/images/placeholder-home.jpg'">
+            <div class="listing-badge ${badgeClass}">${badgeText}</div>
+          </div>
+          <div class="listing-body">
+            <div class="listing-price">${price}</div>
+            <div class="listing-address">${addr}</div>
+            <div class="listing-meta">
+              <span><i class="fas fa-bed"></i> ${beds} bd</span>
+              <span><i class="fas fa-bath"></i> ${baths} ba</span>
+            </div>
+          </div></a>`;
+      }).join('');
+
+      // Pagination Management Configuration Matrix
+      const totalPages = Math.ceil((data.count || 0) / 12);
+      const pag = document.getElementById('searchPagination');
+      pag.innerHTML = '';
+      
+      if (totalPages > 1) {
+        if (page > 1) pag.innerHTML += `<button class="page-btn arrow" onclick="runSearch(${page-1})">&#8592;</button>`;
+        for (let i = Math.max(1, page-2); i <= Math.min(totalPages, page+2); i++) {
+          pag.innerHTML += `<button class="page-btn ${i===page?'active':''}" onclick="runSearch(${i})">${i}</button>`;
+        }
+        if (page < totalPages) pag.innerHTML += `<button class="page-btn arrow" onclick="runSearch(${page+1})">&#8594;</button>`;
+      }
+    }).catch(() => {
+      document.getElementById('listingsContainer').innerHTML = '<div style="grid-column:1/-1;text-align:center;padding:60px;color:var(--text-light);">Error loading listings. Please try again.</div>';
+    });
+}
+
+function toggleView(mode) {
+  // Future: toggle map/list view
+}
+
+// Run search automatically on initial asset compilation render
+runSearch();
+</script>

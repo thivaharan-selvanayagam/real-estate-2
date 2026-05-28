@@ -1,0 +1,48 @@
+<%- include('../partials/header') %>
+
+<div class="page-hero">
+  <div class="page-hero-bg">
+    <img src="https://images.unsplash.com/photo-1492691527719-9d1e07e534b4?w=1400&q=80" alt="Vlog">
+  </div>
+  <div class="page-hero-overlay"></div>
+  <div class="page-hero-content"><h1>Video Spotlight</h1></div>
+</div>
+
+<section class="section bg-cream">
+  <div class="container">
+    <div class="section-header text-center mb-48">
+      <span class="section-label">Watch & Learn</span>
+      <h2>Latest Videos</h2>
+    </div>
+    <div class="vlog-grid">
+      <% const videos = [
+        { title: 'Ultimate Guide to Buying a Home in Bastrop TX', date: 'May 20, 2026', thumb: 'https://images.unsplash.com/photo-1570168007204-dfb528c6958f?w=600&q=70', duration: '12:45' },
+        { title: 'Investment Opportunity in Bastrop County', date: 'May 8, 2026', thumb: 'https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?w=600&q=70', duration: '8:32' },
+        { title: 'Bastrop Market Update – Spring 2026', date: 'April 25, 2026', thumb: 'https://images.unsplash.com/photo-1449844908441-8829872d2607?w=600&q=70', duration: '15:20' },
+        { title: '5 Things to Know Before Moving to Bastrop', date: 'April 10, 2026', thumb: 'https://images.unsplash.com/photo-1613977257363-707ba9348227?w=600&q=70', duration: '10:15' },
+        { title: 'Property Tour: Luxury Homes in Central Texas', date: 'March 28, 2026', thumb: 'https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=600&q=70', duration: '18:50' },
+        { title: 'How to Sell Your Home Fast in Any Market', date: 'March 15, 2026', thumb: 'https://images.unsplash.com/photo-1582407947304-fd86f28f4a0a?w=600&q=70', duration: '11:30' },
+      ] %>
+      <% videos.forEach(v => { %>
+      <div class="vlog-card">
+        <div class="vlog-thumb">
+          <img src="<%= v.thumb %>" alt="<%= v.title %>">
+          <div class="vlog-play">
+            <div class="vlog-play-btn"><i class="fas fa-play" style="margin-left:3px;"></i></div>
+          </div>
+          <div style="position:absolute;bottom:8px;right:8px;background:rgba(0,0,0,0.75);color:var(--white);font-size:11px;padding:3px 8px;border-radius:3px;"><%= v.duration %></div>
+        </div>
+        <div class="vlog-body">
+          <div class="vlog-title"><%= v.title %></div>
+          <div class="vlog-meta"><%= v.date %></div>
+        </div>
+      </div>
+      <% }) %>
+    </div>
+    <div class="text-center mt-48">
+      <a href="https://youtube.com" target="_blank" class="btn btn-primary btn-lg"><i class="fab fa-youtube" style="margin-right:8px;"></i>Subscribe on YouTube</a>
+    </div>
+  </div>
+</section>
+
+<%- include('../partials/footer') %>

@@ -1,0 +1,57 @@
+<%- include('../partials/header') %>
+
+<div class="page-hero">
+  <div class="page-hero-bg">
+    <img src="https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=1400&q=80" alt="Buyer's Guide">
+  </div>
+  <div class="page-hero-overlay"></div>
+  <div class="page-hero-content"><h1>Buyer's Guide</h1></div>
+</div>
+
+<section class="section bg-cream">
+  <div class="container">
+    <div class="section-header text-center mb-48">
+      <span class="section-label">Your Roadmap</span>
+      <h2>Steps to Buying Your Home</h2>
+      <p style="color:var(--text-mid);max-width:600px;margin:16px auto 0;">Buying a home is one of the most significant financial decisions you'll make. Rajivan is here to guide you every step of the way.</p>
+    </div>
+    <div class="guide-steps">
+      <% const buyerSteps = [
+        { title: 'Define Your Goals', text: 'Determine your budget, desired location, home size, and must-have features. Understanding what you need versus what you want helps narrow your search.' },
+        { title: 'Get Pre-Approved', text: 'Contact a mortgage lender to get pre-approved for a loan. This shows sellers you\'re serious and gives you a clear picture of your budget.' },
+        { title: 'Start Your Home Search', text: 'Work with Rajivan to tour homes that match your criteria. Use our home search tool to explore available listings in Bastrop and surrounding areas.' },
+        { title: 'Make an Offer', text: 'Once you find the right home, Rajivan will help you craft a competitive offer based on market conditions and comparable sales.' },
+        { title: 'Home Inspection', text: 'Hire a professional inspector to evaluate the property\'s condition. This protects you from unexpected repairs and gives leverage for negotiations.' },
+        { title: 'Finalize Financing', text: 'Work with your lender to finalize your mortgage. Provide all required documents promptly to keep the process moving.' },
+        { title: 'Closing Day', text: 'Review and sign all closing documents, pay closing costs, and receive your keys. Congratulations — you\'re a homeowner!' },
+      ] %>
+      <% buyerSteps.forEach((s, i) => { %>
+      <div class="guide-step">
+        <div class="guide-step-num"><%= i + 1 %></div>
+        <div class="guide-step-text">
+          <h4><%= s.title %></h4>
+          <p><%= s.text %></p>
+        </div>
+      </div>
+      <% }) %>
+    </div>
+    <div class="text-center mt-48">
+      <a href="/home-search" class="btn btn-primary btn-lg">Start Searching</a>
+      <a href="/contact" class="btn btn-outline btn-lg" style="margin-left:16px;">Talk to Rajivan</a>
+    </div>
+  </div>
+</section>
+
+<section class="cta-section">
+  <div class="container">
+    <div class="cta-inner">
+      <div>
+        <span class="section-label">Calculate Costs</span>
+        <h2>Estimate Your Monthly Payment</h2>
+      </div>
+      <a href="/mortgage-calculator" class="btn btn-primary btn-lg">Mortgage Calculator</a>
+    </div>
+  </div>
+</section>
+
+<%- include('../partials/footer') %>

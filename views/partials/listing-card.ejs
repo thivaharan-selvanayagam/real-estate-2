@@ -1,0 +1,39 @@
+<% 
+  let img = listing.images && listing.images[0] ? listing.images[0] : '/images/placeholder-home.jpg';
+  
+  // Point partial MLS photo strings directly to the official Repliers CDN container
+  if (img && !img.startsWith('http') && !img.startsWith('/')) {
+    img = `https://cdn.repliers.io/${img}`;
+  }
+
+  const price = listing.listPrice ? '$' + Number(listing.listPrice).toLocaleString() : 'Price on Request';
+  
+  const streetSegment = [listing.address?.streetNumber, listing.address?.streetName].filter(Boolean).join(' ');
+  const cityStateSegment = [listing.address?.city, listing.address?.state].filter(Boolean).join(', ');
+  const addr = listing.address 
+    ? `${streetSegment}${streetSegment && cityStateSegment ? ', ' : ''}${cityStateSegment} ${listing.address?.zip || ''}`.trim() 
+    : 'Address on Request';
+
+  const beds = listing.details?.numBedrooms || listing.bedrooms || '–';
+  const baths = listing.details?.numBathrooms || listing.bathrooms || '–';
+  const sqft = listing.details?.sqft ? Number(listing.details.sqft).toLocaleString() + ' sq ft' : '';
+  const status = listing.status || 'A';
+  const mlsNum = listing.mlsNumber || listing.listingId || '';
+%>
+<a href="/listings/<%= mlsNum %>" class="listing-card">
+  <div class="listing-img-wrap">
+    <img src="<%= img %>" alt="<%= addr %>" loading="lazy" onerror="this.src='/img/placeholder-home.jpg'">
+    <div class="listing-badge <%= status === 'A' ? 'badge-sale' : 'badge-contract' %>">
+      <%= status === 'A' ? 'For Sale' : 'Under Contract' %>
+    </div>
+  </div>
+  <div class="listing-body">
+    <div class="listing-price"><%= price %></div>
+    <div class="listing-address"><%= addr %></div>
+    <div class="listing-meta">
+      <% if (beds !== '–') { %><span><i class="fas fa-bed"></i> <%= beds %> bd</span><% } %>
+      <% if (baths !== '–') { %><span><i class="fas fa-bath"></i> <%= baths %> ba</span><% } %>
+      <% if (sqft) { %><span><i class="fas fa-ruler-combined"></i> <%= sqft %></span><% } %>
+    </div>
+  </div>
+</a>

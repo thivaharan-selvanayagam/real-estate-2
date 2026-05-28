@@ -1,0 +1,51 @@
+<%- include('../partials/header') %>
+
+<div class="page-hero">
+  <div class="page-hero-bg">
+    <img src="https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=1400&q=80" alt="Testimonials">
+  </div>
+  <div class="page-hero-overlay"></div>
+  <div class="page-hero-content"><h1>Testimonials</h1></div>
+</div>
+
+<section class="section">
+  <div class="container">
+    <div class="section-header text-center mb-48">
+      <span class="section-label">Client Stories</span>
+      <h2>What Our Clients Say</h2>
+    </div>
+    <div class="listings-grid-3" style="gap:32px;">
+      <% const testimonials = [
+        { name: 'Sarah & Michael T.', text: "Rajivan made our home buying experience seamless from start to finish. His knowledge of the Bastrop market is unparalleled, and he genuinely cared about finding us the right home — not just any home.", rating: 5 },
+        { name: 'Darryl N.', text: "Rajivan is a REALLY SMART guy. He knows his market very well. He will give advice if asked — he is highly ethical and he communicates professionally. Exceeded all our expectations.", rating: 5 },
+        { name: 'Jennifer L.', text: "I've bought and sold a lot of property during my lifetime. Rajivan made the process easy and stress-free. His market insight and negotiation skills saved us thousands of dollars.", rating: 5 },
+        { name: 'Robert & Karen M.', text: "Rajivan helped us navigate a complicated real estate scenario. He was marvelous throughout and he went way out of his way to help us. Highly recommend!", rating: 5 },
+        { name: 'Amanda C.', text: "As a first-time buyer, I was nervous about the process. Rajivan walked me through every step, answered all my questions, and made me feel confident in my decision. Couldn't be happier!", rating: 5 },
+        { name: 'Thomas P.', text: "Sold our home in less than two weeks at above asking price. Rajivan's marketing strategy and pricing expertise are second to none. He's the only agent I'll ever use.", rating: 5 },
+        { name: 'Maria & Jose G.', text: "We were relocating from out of state and Rajivan made the remote home buying process incredibly smooth. He was always available, responsive, and truly had our best interests at heart.", rating: 5 },
+        { name: 'David K.', text: "Rajivan's communication throughout the entire process was excellent. He kept us informed at every stage, explained everything clearly, and delivered outstanding results.", rating: 5 },
+        { name: 'Linda S.', text: "After working with other agents, working with Rajivan was a breath of fresh air. Professional, knowledgeable, and genuinely caring. He helped us find our forever home in Bastrop.", rating: 5 },
+      ] %>
+      <% testimonials.forEach(t => { %>
+      <div class="testimonial-card">
+        <div class="testimonial-stars">
+          <% for (let i = 0; i < t.rating; i++) { %><i class="fas fa-star"></i><% } %>
+        </div>
+        <p class="testimonial-text">"<%= t.text %>"</p>
+        <div class="testimonial-author">— <%= t.name %></div>
+      </div>
+      <% }) %>
+    </div>
+  </div>
+</section>
+
+<section class="work-with" style="background-image:url('https://images.unsplash.com/photo-1570168007204-dfb528c6958f?w=1400&q=70');">
+  <div class="work-with-overlay"></div>
+  <div class="container work-with-content">
+    <h2>Work With Rajivan</h2>
+    <p>Ready to add your success story? Contact Rajivan today.</p>
+    <a href="/contact" class="btn btn-primary btn-lg mt-32">Let's Connect</a>
+  </div>
+</section>
+
+<%- include('../partials/footer') %>

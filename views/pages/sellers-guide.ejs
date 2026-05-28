@@ -1,0 +1,57 @@
+<%- include('../partials/header') %>
+
+<div class="page-hero">
+  <div class="page-hero-bg">
+    <img src="https://images.unsplash.com/photo-1582407947304-fd86f28f4a0a?w=1400&q=80" alt="Seller's Guide">
+  </div>
+  <div class="page-hero-overlay"></div>
+  <div class="page-hero-content"><h1>Seller's Guide</h1></div>
+</div>
+
+<section class="section" style="background:var(--navy);">
+  <div class="container">
+    <div class="section-header text-center mb-48">
+      <span class="section-label" style="color:var(--gold-light);">Maximize Your Sale</span>
+      <h2 style="color:var(--white);">Steps to Selling Your Home</h2>
+      <p style="color:rgba(255,255,255,0.65);max-width:600px;margin:16px auto 0;">Selling your home doesn't have to be stressful. With Rajivan's expertise, you'll get top dollar with minimal hassle.</p>
+    </div>
+    <div class="guide-steps">
+      <% const sellerSteps = [
+        { title: 'Understand Your Home\'s Value', text: 'Start with a free home valuation from Rajivan. Understanding current market conditions and comparable sales is key to pricing your home correctly.' },
+        { title: 'Prepare Your Home', text: 'First impressions matter. Deep clean, declutter, and consider minor repairs or upgrades that can significantly increase your home\'s appeal and value.' },
+        { title: 'Professional Photography & Marketing', text: 'Rajivan uses professional photography, virtual tours, and a comprehensive marketing strategy to showcase your home to the widest possible audience.' },
+        { title: 'List Your Home', text: 'Your home will be listed on the MLS, Zillow, Realtor.com, and dozens of other platforms, plus Rajivan\'s personal network of buyers and agents.' },
+        { title: 'Review Offers', text: 'Rajivan will help you evaluate all offers, considering price, contingencies, financing, and closing timeline to choose the best overall deal.' },
+        { title: 'Negotiate & Accept', text: 'Using his expert negotiation skills, Rajivan will work to get you the best possible terms and price for your property.' },
+        { title: 'Close the Sale', text: 'From inspection responses to the final walkthrough, Rajivan manages every detail to ensure a smooth, successful closing.' },
+      ] %>
+      <% sellerSteps.forEach((s, i) => { %>
+      <div class="guide-step">
+        <div class="guide-step-num" style="background:var(--gold);color:var(--navy);"><%= i + 1 %></div>
+        <div class="guide-step-text">
+          <h4 style="color:var(--white);"><%= s.title %></h4>
+          <p style="color:rgba(255,255,255,0.65);"><%= s.text %></p>
+        </div>
+      </div>
+      <% }) %>
+    </div>
+    <div class="text-center mt-48">
+      <a href="/home-valuation" class="btn btn-primary btn-lg">Get Free Valuation</a>
+      <a href="/contact" class="btn btn-outline-light btn-lg" style="margin-left:16px;">Talk to Rajivan</a>
+    </div>
+  </div>
+</section>
+
+<section class="cta-section">
+  <div class="container">
+    <div class="cta-inner">
+      <div>
+        <span class="section-label">Know Your Worth</span>
+        <h2>What's Your Home Worth Today?</h2>
+      </div>
+      <a href="/home-valuation" class="btn btn-primary btn-lg">Free Valuation</a>
+    </div>
+  </div>
+</section>
+
+<%- include('../partials/footer') %>

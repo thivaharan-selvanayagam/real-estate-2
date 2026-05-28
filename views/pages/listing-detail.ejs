@@ -1,0 +1,164 @@
+<%- include('../partials/header') %>
+
+<%
+  const addr = listing && listing.address ? `${listing.address.streetNumber || ''} ${listing.address.streetName || ''}, ${listing.address.city || ''}, ${listing.address.state || ''} ${listing.address.zip || ''}` : 'Property';
+  const price = listing && listing.listPrice ? '$' + Number(listing.listPrice).toLocaleString() : 'Price on Request';
+  
+  // Map over every item in the array to prepend the CDN host string securely
+  const rawImgs = listing && listing.images ? listing.images : [];
+  const imgs = rawImgs.map(img => {
+    if (img && !img.startsWith('http') && !img.startsWith('/')) {
+      return `https://cdn.repliers.io/${img}`;
+    }
+    return img;
+  });
+
+  const beds = listing && (listing.details?.numBedrooms || listing.bedrooms);
+  const baths = listing && (listing.details?.numBathrooms || listing.bathrooms);
+  const sqft = listing && listing.details?.sqft;
+  const desc = listing && listing.details?.description || '';
+%>
+
+<div style="padding-top:70px;">
+  <div class="detail-gallery">
+    <div class="detail-gallery-main">
+      <img id="mainImg" src="<%= imgs[0] || '/img/placeholder-home.jpg' %>" alt="<%= addr %>" onerror="this.src='/img/placeholder-home.jpg'">
+    </div>
+    <% if (imgs.length > 1) { %>
+    <div class="detail-gallery-thumbs">
+      <% imgs.slice(0,5).forEach((img,i) => { %>
+      <img src="<%= img %>" alt="Photo <%= i+1 %>" class="gallery-thumb <%= i===0?'active':'' %>" onclick="setMainImg(this)" onerror="this.src='/img/placeholder-home.jpg'">
+      <% }) %>
+    </div>
+    <% } %>
+  </div>
+
+  <section class="section">
+    <div class="container">
+      <div class="detail-layout">
+        <div class="detail-main">
+          <div style="margin-bottom:8px;"><span class="listing-badge badge-sale" style="position:relative;top:0;left:0;">For Sale</span></div>
+          <h1 style="font-family:var(--font-display);font-size:clamp(28px,5vw,48px);font-weight:300;color:var(--navy);margin-bottom:8px;"><%= addr %></h1>
+          <div style="font-family:var(--font-display);font-size:36px;color:var(--gold);font-weight:300;margin-bottom:24px;"><%= price %></div>
+          <div style="display:flex;gap:24px;flex-wrap:wrap;margin-bottom:32px;">
+            <% if (beds) { %><div style="display:flex;align-items:center;gap:8px;"><i class="fas fa-bed" style="color:var(--gold);"></i><span><strong><%= beds %></strong> Bedrooms</span></div><% } %>
+            <% if (baths) { %><div style="display:flex;align-items:center;gap:8px;"><i class="fas fa-bath" style="color:var(--gold);"></i><span><strong><%= baths %></strong> Bathrooms</span></div><% } %>
+            <% if (sqft) { %><div style="display:flex;align-items:center;gap:8px;"><i class="fas fa-ruler-combined" style="color:var(--gold);"></i><span><strong><%= Number(sqft).toLocaleString() %></strong> sq ft</span></div><% } %>
+            <% if (listing.details?.numGarageSpaces) { %><div style="display:flex;align-items:center;gap:8px;"><i class="fas fa-car" style="color:var(--gold);"></i><span><strong><%= listing.details.numGarageSpaces %></strong> Garage</span></div><% } %>
+          </div>
+
+          <% if (desc) { %>
+          <div style="margin-bottom:32px;">
+            <h3 style="font-family:var(--font-body);font-size:14px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--navy);margin-bottom:12px;">About This Property</h3>
+            <p style="color:var(--text-mid);line-height:1.8;"><%= desc %></p>
+          </div>
+          <% } %>
+
+          <div style="margin-bottom:32px;">
+            <h3 style="font-family:var(--font-body);font-size:14px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--navy);margin-bottom:16px;">Property Details</h3>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:0;border:1px solid var(--cream-dark);border-radius:4px;overflow:hidden;">
+              <% const details = [
+                ['MLS Number', listing.mlsNumber || listing.listingId || '–'],
+                ['Property Type', listing.type || listing.class || '–'],
+                ['Year Built', listing.details?.yearBuilt || '–'],
+                ['Lot Size', listing.lot?.acres ? listing.lot.acres + ' acres' : '–'],
+                ['Taxes', listing.taxes?.annualAmount ? '$' + Number(listing.taxes.annualAmount).toLocaleString() : '–'],
+                ['Days on Market', listing.daysOnMarket || '–'],
+              ] %>
+              <% details.forEach(([label, val], i) => { %>
+              <div style="padding:12px 16px;background:<%= i%2===0 ? 'var(--cream)' : 'var(--white)' %>;border-bottom:1px solid var(--cream-dark);">
+                <div style="font-size:10px;letter-spacing:0.1em;text-transform:uppercase;color:var(--text-light);margin-bottom:4px;"><%= label %></div>
+                <div style="font-weight:600;color:var(--navy);font-size:14px;"><%= val %></div>
+              </div>
+              <% }) %>
+            </div>
+          </div>
+        </div>
+
+        <div class="detail-sidebar">
+          <div class="detail-contact-card">
+            <div style="text-align:center;margin-bottom:20px;">
+              <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?w=200&q=80" alt="Rajivan" style="width:80px;height:80px;border-radius:50%;object-fit:cover;border:3px solid var(--gold);margin-bottom:12px;">
+              <div style="font-family:var(--font-display);font-size:18px;font-weight:700;color:var(--navy);">Rajivan Varatharajah</div>
+              <div style="font-size:11px;letter-spacing:0.15em;text-transform:uppercase;color:var(--gold);">Real Estate Agent</div>
+            </div>
+            <a href="tel:+16471234567" class="btn btn-primary" style="width:100%;text-align:center;margin-bottom:12px;"><i class="fas fa-phone" style="margin-right:8px;"></i>+1 (647) 123-4567</a>
+            
+            <div id="showingSuccess" class="alert alert-success" style="display:none; margin-bottom: 16px;">
+              <i class="fas fa-check-circle"></i> Request sent! Rajivan will confirm shortly.
+            </div>
+
+            <div style="margin-bottom:16px;">
+              <input type="text" id="showingName" class="form-input" placeholder="Your name" style="margin-bottom:10px;">
+              <input type="email" id="showingEmail" class="form-input" placeholder="Email" style="margin-bottom:10px;">
+              <input type="tel" id="showingPhone" class="form-input" placeholder="Phone" style="margin-bottom:10px;">
+              <textarea id="showingMsg" class="form-input form-textarea" style="min-height:100px;" placeholder="How can Rajivan help you?">I'd like to schedule a showing for the property located at <%= addr %>.</textarea>
+            </div>
+            <button id="showingBtn" class="btn btn-primary" style="width:100%;" onclick="submitShowingRequest()">Request Showing</button>
+          </div>
+          <div style="margin-top:16px;text-align:center;">
+            <a href="/home-valuation" style="font-size:12px;color:var(--gold);letter-spacing:0.05em;">Get a Free Home Valuation →</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<%- include('../partials/footer') %>
+
+<script>
+// Thumbnail photo swap logic
+function setMainImg(thumb) {
+  document.getElementById('mainImg').src = thumb.src;
+  document.querySelectorAll('.gallery-thumb').forEach(t => t.classList.remove('active'));
+  thumb.classList.add('active');
+}
+
+// Async API form processing handler
+function submitShowingRequest() {
+  const name = document.getElementById('showingName').value.trim();
+  const email = document.getElementById('showingEmail').value.trim();
+  const phone = document.getElementById('showingPhone').value.trim();
+  const message = document.getElementById('showingMsg').value.trim();
+  const btn = document.getElementById('showingBtn');
+
+  if (!name || !email) {
+    alert('Please enter your name and email address to request a property showing.');
+    return;
+  }
+
+  // Visual execution safety lock
+  btn.disabled = true;
+  btn.innerText = 'Sending Request...';
+
+  fetch('/api/contact', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      name,
+      email,
+      phone,
+      message: `[PROPERTY SHOWING REQUEST]\nURL: ${window.location.href}\n\n${message}`
+    })
+  })
+  .then(response => response.json())
+  .then(data => {
+    if (data.success) {
+      document.getElementById('showingSuccess').style.display = 'flex';
+      ['showingName', 'showingEmail', 'showingPhone', 'showingMsg'].forEach(id => {
+        document.getElementById(id).value = '';
+      });
+    } else {
+      alert('Could not submit request. Please try calling the office phone directly.');
+    }
+  })
+  .catch(() => {
+    alert('An unexpected network exception occurred. Please try calling directly.');
+  })
+  .finally(() => {
+    btn.innerText = 'Request Showing';
+    btn.disabled = false;
+  });
+}
+</script>

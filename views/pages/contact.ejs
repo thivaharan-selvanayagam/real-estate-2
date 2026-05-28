@@ -1,0 +1,99 @@
+<%- include('../partials/header') %>
+
+<div class="page-hero" style="height:350px;">
+  <div class="page-hero-bg">
+    <img src="https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=1400&q=80" alt="Contact">
+  </div>
+  <div class="page-hero-overlay"></div>
+  <div class="page-hero-content"><h1>Let's Connect</h1></div>
+</div>
+
+<section class="section">
+  <div class="container">
+    <div class="contact-split">
+      <div class="contact-info">
+        <span class="section-label">Contact Details</span>
+        <h2>Rajivan Varatharajah Group</h2>
+        <div class="contact-detail-item">
+          <div class="contact-icon"><i class="fas fa-phone"></i></div>
+          <div><div class="contact-detail-label">Phone</div><a href="tel:+16471234567">+1 (647) 123-4567</a></div>
+        </div>
+        <div class="contact-detail-item">
+          <div class="contact-icon"><i class="fas fa-envelope"></i></div>
+          <div><div class="contact-detail-label">Email</div><a href="mailto:rajivan@realestate.com">rajivan@realestate.com</a></div>
+        </div>
+        <div class="contact-detail-item">
+          <div class="contact-icon"><i class="fas fa-map-marker-alt"></i></div>
+          <div><div class="contact-detail-label">Address</div><span>Bastrop, TX</span></div>
+        </div>
+        <div class="footer-social" style="margin-top:32px;">
+          <a href="#"><i class="fab fa-facebook-f"></i></a>
+          <a href="#"><i class="fab fa-instagram"></i></a>
+          <a href="#"><i class="fab fa-linkedin-in"></i></a>
+          <a href="#"><i class="fab fa-youtube"></i></a>
+          <a href="#"><i class="fab fa-x-twitter"></i></a>
+          <a href="#"><i class="fab fa-tiktok"></i></a>
+        </div>
+      </div>
+      <div class="contact-form">
+        <span class="section-label">Send a Message</span>
+        <h2>Submit a Message</h2>
+        <div id="contactSuccess" class="alert alert-success" style="display:none;">
+          <i class="fas fa-check-circle"></i> Thank you! Rajivan will be in touch shortly.
+        </div>
+        <div class="form-group">
+          <label class="form-label">Name *</label>
+          <input type="text" id="contactName" class="form-input" placeholder="Your full name">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Email *</label>
+          <input type="email" id="contactEmail" class="form-input" placeholder="your@email.com">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Phone</label>
+          <input type="tel" id="contactPhone" class="form-input" placeholder="+1 (000) 000-0000">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Message</label>
+          <textarea id="contactMsg" class="form-input form-textarea" placeholder="How can Rajivan help you?"></textarea>
+        </div>
+        <div class="form-group" style="display:flex;gap:12px;align-items:flex-start;">
+          <input type="checkbox" id="contactAgree" style="margin-top:3px;flex-shrink:0;">
+          <label for="contactAgree" style="font-size:12px;color:var(--text-mid);line-height:1.6;">
+            I agree to be contacted by Rajivan Varatharajah via call, email, and text for real estate services. To opt out, you can reply 'stop' at any time or reply 'help' for assistance. Message and data rates may apply. Message frequency may vary. <a href="#" style="color:var(--gold);">Privacy Policy</a>.
+          </label>
+        </div>
+        <button class="btn btn-primary" style="width:100%;margin-top:8px;" onclick="submitContact()">
+          Send Message <i class="fas fa-paper-plane" style="margin-left:8px;"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<%- include('../partials/footer') %>
+
+<script>
+function submitContact() {
+  const name = document.getElementById('contactName').value.trim();
+  const email = document.getElementById('contactEmail').value.trim();
+  const msg = document.getElementById('contactMsg').value.trim();
+  if (!name || !email) { alert('Please fill in your name and email.'); return; }
+
+  fetch('/api/contact', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      name,
+      email,
+      phone: document.getElementById('contactPhone').value,
+      message: msg
+    })
+  }).then(r => r.json()).then(data => {
+    if (data.success) {
+      document.getElementById('contactSuccess').style.display = 'block';
+      ['contactName','contactEmail','contactPhone','contactMsg'].forEach(id => document.getElementById(id).value = '');
+    }
+  }).catch(() => alert('Error sending message. Please call directly.'));
+}
+</script>

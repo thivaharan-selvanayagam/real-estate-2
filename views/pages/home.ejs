@@ -1,0 +1,217 @@
+<%- include('../partials/header') %>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg">
+    <img src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=1600&q=80" alt="Luxury Home">
+  </div>
+  <div class="hero-overlay"></div>
+  <div class="hero-content fade-up">
+    <span class="section-label">Rajivan Varatharajah Group</span>
+    <h1>Bastrop Real Estate Group</h1>
+    <p class="hero-sub">Expert Buyer, Seller, and Investment Services</p>
+    <p>Your trusted partner in Bastrop, TX real estate. Helping clients find their dream homes with confidence, expertise, and dedication.</p>
+    <div style="display:flex;gap:16px;justify-content:center;flex-wrap:wrap;">
+      <a href="/home-search" class="btn btn-primary btn-lg">Search Homes</a>
+      <a href="/home-valuation" class="btn btn-outline-light btn-lg">Home Valuation</a>
+    </div>
+  </div>
+  <div class="hero-search-bar">
+    <div class="container">
+      <div class="quick-search-bar">
+        <input type="text" id="heroSearch" placeholder="City, neighborhood, ZIP code..." class="quick-search-input">
+        <select class="quick-search-select" id="heroType">
+          <option value="">All Types</option>
+          <option value="residential">Residential</option>
+          <option value="condo">Condo</option>
+          <option value="land">Land</option>
+        </select>
+        <button class="btn btn-primary" onclick="doHeroSearch()">
+          <i class="fas fa-search"></i> Search
+        </button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section class="section bg-cream">
+  <div class="container">
+    <div class="section-header text-center mb-48">
+      <span class="section-label">What We Do</span>
+      <h2>Helping Buyers & Sellers Succeed</h2>
+    </div>
+    <div class="listings-grid-3" style="gap:24px;">
+      <div class="info-card text-center">
+        <div class="info-card-icon"><i class="fas fa-home"></i></div>
+        <h3>Buying a Home</h3>
+        <p>From first showing to closing day, Rajivan guides you through every step of the purchase process.</p>
+        <a href="/home-search" class="btn btn-outline mt-16">Search Homes</a>
+      </div>
+      <div class="info-card text-center">
+        <div class="info-card-icon"><i class="fas fa-tag"></i></div>
+        <h3>Selling a Home</h3>
+        <p>Get top dollar for your property with expert pricing strategy, marketing, and negotiation.</p>
+        <a href="/home-valuation" class="btn btn-outline mt-16">Get Valuation</a>
+      </div>
+      <div class="info-card text-center">
+        <div class="info-card-icon"><i class="fas fa-handshake"></i></div>
+        <h3>Let's Connect</h3>
+        <p>Have questions? Ready to start your real estate journey? Reach out — Rajivan is here to help.</p>
+        <a href="/contact" class="btn btn-outline mt-16">Contact Us</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MEET RAJIVAN -->
+<section class="section">
+  <div class="container">
+    <div class="meet-grid">
+      <div class="meet-photo">
+        <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?w=600&q=80" alt="Rajivan Varatharajah">
+      </div>
+      <div class="meet-content">
+        <span class="section-label">About</span>
+        <h2>Meet Rajivan</h2>
+        <p>Rajivan Varatharajah is a dedicated real estate professional committed to helping clients navigate the buying and selling process with confidence. With years of experience in the Bastrop and Central Texas market, Rajivan brings a strategic, client-focused approach to every transaction.</p>
+        <p style="margin-top:16px;">Deeply rooted in the local community, he is passionate about service and actively gives back. Whether you're buying your first home, selling your property, or investing in Texas real estate, Rajivan is ready to put his experience and dedication to work for you.</p>
+        <div style="display:flex;gap:16px;margin-top:32px;flex-wrap:wrap;">
+          <a href="/about" class="btn btn-primary">Learn More</a>
+          <a href="/contact" class="btn btn-outline">Let's Connect</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURED LISTINGS -->
+<section class="section bg-cream">
+  <div class="container">
+    <div class="section-header text-center mb-48">
+      <span class="section-label">Explore My Portfolio</span>
+      <h2>Featured Properties</h2>
+    </div>
+    <div class="listings-grid-3">
+      <% if (listings && listings.length > 0) { %>
+        <% listings.slice(0, 6).forEach(listing => { %>
+          <%- include('../partials/listing-card', { listing }) %>
+        <% }) %>
+      <% } else { %>
+        <% for (let i = 0; i < 3; i++) { %>
+        <div class="listing-card">
+          <div class="listing-img-wrap skeleton" style="height:220px;"></div>
+          <div class="listing-body">
+            <div class="skeleton" style="height:20px;width:60%;margin-bottom:8px;"></div>
+            <div class="skeleton" style="height:16px;width:80%;"></div>
+          </div>
+        </div>
+        <% } %>
+      <% } %>
+    </div>
+    <div class="text-center mt-48">
+      <a href="/listings" class="btn btn-primary btn-lg">View All Listings</a>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS PREVIEW -->
+<section class="section" style="background: linear-gradient(135deg, #0d1b2a 0%, #1a2d45 100%); position:relative; overflow:hidden;">
+  <div style="position:absolute;inset:0;background-image:url('https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=1400&q=60');background-size:cover;opacity:0.08;"></div>
+  <div class="container" style="position:relative;z-index:2;">
+    <div class="section-header text-center mb-48">
+      <span class="section-label" style="color:var(--gold-light);">Client Stories</span>
+      <h2 style="color:var(--white);">Testimonials</h2>
+    </div>
+    <div class="testimonials-slider">
+      <div class="testimonial-slide active">
+        <div class="testimonial-quote">"Rajivan made our home buying experience seamless from start to finish. His knowledge of the Bastrop market is unparalleled, and he genuinely cared about finding us the right home."</div>
+        <div class="testimonial-author">— Sarah & Michael T.</div>
+      </div>
+    </div>
+    <div class="text-center mt-48">
+      <a href="/testimonials" class="btn btn-outline-light">View All Testimonials</a>
+    </div>
+  </div>
+</section>
+
+<!-- NEIGHBORHOOD GUIDES -->
+<section class="section bg-cream">
+  <div class="container">
+    <div class="section-header text-center mb-48">
+      <span class="section-label">Explore the Area</span>
+      <h2>Neighborhood Guides</h2>
+    </div>
+    <div class="neighborhoods-grid">
+      <% const hoods = [
+        { name: 'Bastrop', img: 'https://images.unsplash.com/photo-1570168007204-dfb528c6958f?w=600&q=70' },
+        { name: 'Bastrop County', img: 'https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?w=600&q=70' },
+        { name: 'Smithville', img: 'https://images.unsplash.com/photo-1501854140801-50d01698950b?w=600&q=70' },
+        { name: 'Elgin', img: 'https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=600&q=70' },
+        { name: 'Del Valle', img: 'https://images.unsplash.com/photo-1472214103451-9374bd1c798e?w=600&q=70' },
+        { name: 'Austin', img: 'https://images.unsplash.com/photo-1531218150217-54595bc2b934?w=600&q=70' },
+      ] %>
+      <% hoods.forEach(h => { %>
+      <a href="/neighborhoods" class="neighborhood-card">
+        <img src="<%= h.img %>" alt="<%= h.name %>">
+        <div class="neighborhood-overlay">
+          <h3><%= h.name %></h3>
+        </div>
+      </a>
+      <% }) %>
+    </div>
+    <div class="text-center mt-48">
+      <a href="/neighborhoods" class="btn btn-primary">View All Areas</a>
+    </div>
+  </div>
+</section>
+
+<!-- HOME VALUATION CTA -->
+<section class="cta-section">
+  <div class="container">
+    <div class="cta-inner">
+      <div>
+        <span class="section-label">Find Out Now</span>
+        <h2>How Much Is Your Home Worth?</h2>
+      </div>
+      <a href="/home-valuation" class="btn btn-primary btn-lg">Get Free Valuation</a>
+    </div>
+  </div>
+</section>
+
+<!-- WORK WITH RAJIVAN -->
+<section class="work-with" style="background-image:url('https://images.unsplash.com/photo-1570168007204-dfb528c6958f?w=1400&q=70');">
+  <div class="work-with-overlay"></div>
+  <div class="container work-with-content">
+    <span class="section-label">Start Today</span>
+    <h2>Work With Rajivan</h2>
+    <p>With a passion for real estate and years of experience in sales and negotiation, Rajivan ensures every client gets top-tier service. Call him today to see how he can help you navigate the Bastrop real estate market with confidence.</p>
+    <a href="/contact" class="btn btn-primary btn-lg mt-32">Let's Connect</a>
+  </div>
+</section>
+
+<!-- EMAIL SIGNUP -->
+<section class="email-signup">
+  <div class="container">
+    <span class="section-label" style="color:var(--gold-light);">Stay Informed</span>
+    <h2>Receive Exclusive Listings In Your Inbox</h2>
+    <p>Be the first to know about new listings, price changes, and market updates.</p>
+    <div class="email-form">
+      <input type="email" placeholder="Your email address">
+      <button class="btn btn-primary">Subscribe</button>
+    </div>
+  </div>
+</section>
+
+<%- include('../partials/footer') %>
+
+<script>
+function doHeroSearch() {
+  const q = document.getElementById('heroSearch').value;
+  const type = document.getElementById('heroType').value;
+  window.location.href = `/home-search?q=${encodeURIComponent(q)}&type=${type}`;
+}
+document.getElementById('heroSearch').addEventListener('keypress', e => {
+  if (e.key === 'Enter') doHeroSearch();
+});
+</script>

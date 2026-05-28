@@ -1,0 +1,43 @@
+<%- include('../partials/header') %>
+
+<div class="page-hero">
+  <div class="page-hero-bg">
+    <img src="https://images.unsplash.com/photo-1499750310107-5fef28a66643?w=1400&q=80" alt="Blog">
+  </div>
+  <div class="page-hero-overlay"></div>
+  <div class="page-hero-content"><h1>Blog</h1></div>
+</div>
+
+<section class="section bg-cream">
+  <div class="container">
+    <div class="section-header text-center mb-48">
+      <span class="section-label">Stay Informed</span>
+      <h2>Market Insights & Tips</h2>
+    </div>
+    <div class="blog-grid">
+      <% const posts = [
+        { title: 'Best Neighborhoods in Bastrop for Families', date: 'May 15, 2026', category: 'Neighborhoods', img: 'https://images.unsplash.com/photo-1570168007204-dfb528c6958f?w=600&q=70', excerpt: 'Discover the top family-friendly neighborhoods in Bastrop, TX — from great schools to parks and community events.' },
+        { title: 'Bastrop Real Estate Market Update – Spring 2026', date: 'May 2, 2026', category: 'Market News', img: 'https://images.unsplash.com/photo-1460472178825-e5240623afd5?w=600&q=70', excerpt: 'Spring brings renewed activity to the Bastrop market. Here\'s what buyers and sellers need to know right now.' },
+        { title: '5 Home Improvements That Add the Most Value', date: 'April 18, 2026', category: 'Selling Tips', img: 'https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=600&q=70', excerpt: 'Not all renovations are equal. These five improvements consistently deliver the highest return on investment.' },
+        { title: 'First-Time Buyer\'s Complete Checklist for 2026', date: 'April 5, 2026', category: 'Buying Tips', img: 'https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=600&q=70', excerpt: 'Everything first-time homebuyers need to know before starting their search in Central Texas.' },
+        { title: 'Why Bastrop is One of Texas\'s Fastest Growing Cities', date: 'March 22, 2026', category: 'Community', img: 'https://images.unsplash.com/photo-1449844908441-8829872d2607?w=600&q=70', excerpt: 'From tech spillover to natural beauty, here\'s why so many people are choosing to call Bastrop home.' },
+        { title: 'Understanding Your Home\'s Equity', date: 'March 10, 2026', category: 'Finance', img: 'https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=600&q=70', excerpt: 'Home equity is one of your most powerful financial tools. Learn how to measure, build, and leverage it wisely.' },
+      ] %>
+      <% posts.forEach(post => { %>
+      <a href="/blog" class="blog-card">
+        <div class="blog-img">
+          <img src="<%= post.img %>" alt="<%= post.title %>">
+        </div>
+        <div class="blog-body">
+          <div class="blog-meta"><span class="blog-cat"><%= post.category %></span><span><%= post.date %></span></div>
+          <h3 class="blog-title"><%= post.title %></h3>
+          <p class="blog-excerpt"><%= post.excerpt %></p>
+          <span class="blog-read-more">Read More <i class="fas fa-arrow-right"></i></span>
+        </div>
+      </a>
+      <% }) %>
+    </div>
+  </div>
+</section>
+
+<%- include('../partials/footer') %>
