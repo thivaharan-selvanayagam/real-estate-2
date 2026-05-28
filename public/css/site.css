@@ -1071,22 +1071,38 @@ select.calc-input { padding: 12px 14px; cursor: pointer; }
     gap: 24px !important;
   }
 
-  /* Fix Home Page Hero Section Layout */
+  /* ==========================================================================
+     FIX 1: HERO SEARCH PORTAL MOBILE RECONSTRUCTION
+     Forces vertical stacking so the relative search options display correctly
+     ========================================================================== */
   .hero {
-    padding-top: 70px !important;
-    min-height: 85vh !important;
+    padding-top: 90px !important;
+    min-height: 100vh !important;
+    display: flex !important;
+    flex-direction: column !important; /* Stacks text above search option vertically */
+    justify-content: center !important;
     align-items: center !important;
+  }
+  .hero-content {
+    margin-bottom: 32px !important;
+    padding: 0 20px !important;
   }
   .hero-search-bar {
     position: relative !important;
     bottom: auto !important;
-    padding: 40px 0 0 !important;
+    width: 100% !important;
+    padding: 0 20px !important; /* Side safety paddings */
+    overflow: visible !important;
   }
   .quick-search-bar {
     flex-direction: column !important;
     background: transparent !important;
     box-shadow: none !important;
     gap: 12px !important;
+    width: 100% !important;
+  }
+  .search-input-container {
+    width: 100% !important; /* Expands search box suggestion track */
   }
   .quick-search-input,
   .quick-search-select {
@@ -1098,13 +1114,27 @@ select.calc-input { padding: 12px 14px; cursor: pointer; }
     height: 50px !important;
   }
   .quick-search-select {
-    border-left: auto !important;
+    border-left: 1px solid var(--cream-dark) !important;
   }
   .quick-search-bar .btn {
     width: 100% !important;
     border-radius: 4px !important;
     padding: 14px 0 !important;
     justify-content: center !important;
+  }
+
+  /* ==========================================================================
+     FIX 2: FOOTER SIDE SAFETY GUTTERS
+     Re-injects horizontal spacing so text doesn't hide behind screen borders
+     ========================================================================== */
+  .footer-top {
+    padding: 48px 24px 32px !important; /* Left & right padding 24px fixes text edge cutoff */
+  }
+  .footer-bottom {
+    flex-direction: column !important;
+    text-align: center !important;
+    gap: 16px !important;
+    padding: 24px 24px !important; /* Protects lower corporate disclaimer alignments */
   }
 
   /* Fix Property Valuation Address Form Bar */
@@ -1123,12 +1153,6 @@ select.calc-input { padding: 12px 14px; cursor: pointer; }
     width: 100% !important;
   }
 
-  /* Fix Footer & Sub-links Layout */
-  .footer-bottom {
-    flex-direction: column !important;
-    text-align: center !important;
-    gap: 16px !important;
-  }
   .meet-card-details {
     grid-template-columns: 1fr !important;
     gap: 12px !important;
