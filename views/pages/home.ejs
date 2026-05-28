@@ -1,16 +1,15 @@
 <%- include('../partials/header') %>
 
-<!-- HERO -->
 <section class="hero">
   <div class="hero-bg">
     <img src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=1600&q=80" alt="Luxury Home">
   </div>
   <div class="hero-overlay"></div>
   <div class="hero-content fade-up">
-    <span class="section-label">Rajivan Varatharajah Group</span>
-    <h1>Bastrop Real Estate Group</h1>
+    <span class="section-label">Royal Lepage Associates Realty</span>
+    <h1>Rajivan Varatharajah</h1>
     <p class="hero-sub">Expert Buyer, Seller, and Investment Services</p>
-    <p>Your trusted partner in Bastrop, TX real estate. Helping clients find their dream homes with confidence, expertise, and dedication.</p>
+    <p>Serving Durham, York and Greater Toronto Area</p>
     <div style="display:flex;gap:16px;justify-content:center;flex-wrap:wrap;">
       <a href="/home-search" class="btn btn-primary btn-lg">Search Homes</a>
       <a href="/home-valuation" class="btn btn-outline-light btn-lg">Home Valuation</a>
@@ -18,8 +17,13 @@
   </div>
   <div class="hero-search-bar">
     <div class="container">
-      <div class="quick-search-bar">
-        <input type="text" id="heroSearch" placeholder="City, neighborhood, ZIP code..." class="quick-search-input">
+      <div class="quick-search-bar" style="position: relative; overflow: visible;">
+        
+        <div class="search-input-container">
+          <input type="text" id="heroSearch" placeholder="City, neighborhood, ZIP, or MLS#..." class="quick-search-input" autocomplete="off">
+          <div id="searchSuggestions" class="search-suggestions-box"></div>
+        </div>
+
         <select class="quick-search-select" id="heroType">
           <option value="">All Types</option>
           <option value="residential">Residential</option>
@@ -34,7 +38,6 @@
   </div>
 </section>
 
-<!-- SERVICES -->
 <section class="section bg-cream">
   <div class="container">
     <div class="section-header text-center mb-48">
@@ -64,7 +67,6 @@
   </div>
 </section>
 
-<!-- MEET RAJIVAN -->
 <section class="section">
   <div class="container">
     <div class="meet-grid">
@@ -74,8 +76,8 @@
       <div class="meet-content">
         <span class="section-label">About</span>
         <h2>Meet Rajivan</h2>
-        <p>Rajivan Varatharajah is a dedicated real estate professional committed to helping clients navigate the buying and selling process with confidence. With years of experience in the Bastrop and Central Texas market, Rajivan brings a strategic, client-focused approach to every transaction.</p>
-        <p style="margin-top:16px;">Deeply rooted in the local community, he is passionate about service and actively gives back. Whether you're buying your first home, selling your property, or investing in Texas real estate, Rajivan is ready to put his experience and dedication to work for you.</p>
+        <p>Rajivan Varatharajah is a dedicated real estate professional committed to helping clients navigate the buying and selling process with confidence. With years of experience in sales leadership and expert negotiation skills, Rajivan brings a strategic, client-focused approach to every transaction.</p>
+        <p style="margin-top:16px;">Deeply rooted in the local community, he is passionate about service and actively gives back. Whether you're buying your first home, selling your property, or investing in real estate, Rajivan is ready to put his experience and dedication to work for you.</p>
         <div style="display:flex;gap:16px;margin-top:32px;flex-wrap:wrap;">
           <a href="/about" class="btn btn-primary">Learn More</a>
           <a href="/contact" class="btn btn-outline">Let's Connect</a>
@@ -85,7 +87,6 @@
   </div>
 </section>
 
-<!-- FEATURED LISTINGS -->
 <section class="section bg-cream">
   <div class="container">
     <div class="section-header text-center mb-48">
@@ -115,7 +116,6 @@
   </div>
 </section>
 
-<!-- TESTIMONIALS PREVIEW -->
 <section class="section" style="background: linear-gradient(135deg, #0d1b2a 0%, #1a2d45 100%); position:relative; overflow:hidden;">
   <div style="position:absolute;inset:0;background-image:url('https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=1400&q=60');background-size:cover;opacity:0.08;"></div>
   <div class="container" style="position:relative;z-index:2;">
@@ -125,7 +125,7 @@
     </div>
     <div class="testimonials-slider">
       <div class="testimonial-slide active">
-        <div class="testimonial-quote">"Rajivan made our home buying experience seamless from start to finish. His knowledge of the Bastrop market is unparalleled, and he genuinely cared about finding us the right home."</div>
+        <div class="testimonial-quote">"Rajivan made our home buying experience seamless from start to finish. His knowledge of the market is unparalleled, and he genuinely cared about finding us the right home."</div>
         <div class="testimonial-author">— Sarah & Michael T.</div>
       </div>
     </div>
@@ -135,7 +135,6 @@
   </div>
 </section>
 
-<!-- NEIGHBORHOOD GUIDES -->
 <section class="section bg-cream">
   <div class="container">
     <div class="section-header text-center mb-48">
@@ -166,7 +165,6 @@
   </div>
 </section>
 
-<!-- HOME VALUATION CTA -->
 <section class="cta-section">
   <div class="container">
     <div class="cta-inner">
@@ -179,18 +177,16 @@
   </div>
 </section>
 
-<!-- WORK WITH RAJIVAN -->
 <section class="work-with" style="background-image:url('https://images.unsplash.com/photo-1570168007204-dfb528c6958f?w=1400&q=70');">
   <div class="work-with-overlay"></div>
   <div class="container work-with-content">
     <span class="section-label">Start Today</span>
     <h2>Work With Rajivan</h2>
-    <p>With a passion for real estate and years of experience in sales and negotiation, Rajivan ensures every client gets top-tier service. Call him today to see how he can help you navigate the Bastrop real estate market with confidence.</p>
+    <p>With a passion for real estate and years of experience in sales and negotiation, Rajivan ensures every client gets top-tier service. Call him today to see how he can help you navigate the real estate market with confidence.</p>
     <a href="/contact" class="btn btn-primary btn-lg mt-32">Let's Connect</a>
   </div>
 </section>
 
-<!-- EMAIL SIGNUP -->
 <section class="email-signup">
   <div class="container">
     <span class="section-label" style="color:var(--gold-light);">Stay Informed</span>
@@ -211,7 +207,133 @@ function doHeroSearch() {
   const type = document.getElementById('heroType').value;
   window.location.href = `/home-search?q=${encodeURIComponent(q)}&type=${type}`;
 }
-document.getElementById('heroSearch').addEventListener('keypress', e => {
-  if (e.key === 'Enter') doHeroSearch();
+
+// Global scope initialization parameters for query handling
+let debounceTimer;
+const searchInput = document.getElementById('heroSearch');
+const suggestionsBox = document.getElementById('searchSuggestions');
+
+searchInput.addEventListener('input', () => {
+  clearTimeout(debounceTimer);
+  const query = searchInput.value.trim();
+
+  if (query.length < 2) {
+    suggestionsBox.style.display = 'none';
+    return;
+  }
+
+  // Debounce network connection calls to save bandwidth limits
+  debounceTimer = setTimeout(() => {
+    fetch(`/api/listings?q=${encodeURIComponent(query)}&limit=15`)
+      .then(res => res.json())
+      .then(data => {
+        if (!data.listings || data.listings.length === 0) {
+          suggestionsBox.style.display = 'none';
+          return;
+        }
+
+        // Establish data indexing clusters
+        const matchMLS = new Set();
+        const matchAddresses = new Set();
+        const matchNeighborhoods = new Set();
+        const matchCities = new Set();
+        const matchZips = new Set();
+
+        data.listings.forEach(item => {
+          const lowerQuery = query.toLowerCase();
+          
+          // Index MLS matches
+          const mls = item.mlsNumber || item.listingId;
+          if (mls && mls.toLowerCase().includes(lowerQuery)) matchMLS.add(mls);
+
+          if (item.address) {
+            const city = item.address.city;
+            const hood = item.address.neighborhood;
+            const zip = item.address.zip;
+            
+            // Index location fields
+            if (city && city.toLowerCase().includes(lowerQuery)) matchCities.add(city);
+            if (hood && hood.toLowerCase().includes(lowerQuery)) matchNeighborhoods.add(hood);
+            if (zip && zip.toLowerCase().includes(lowerQuery)) matchZips.add(zip);
+
+            // Index absolute address lines
+            const street = [item.address.streetNumber, item.address.streetName].filter(Boolean).join(' ');
+            if (street && street.toLowerCase().includes(lowerQuery)) {
+              matchAddresses.add(`${street}, ${city || ''}`);
+            }
+          }
+        });
+
+        // Compile HTML strings
+        let htmlOutput = '';
+
+        if (matchMLS.size > 0) {
+          htmlOutput += `<div class="suggestion-group-title">MLS Numbers</div>`;
+          matchMLS.forEach(val => {
+            htmlOutput += `<div class="suggestion-item" onclick="selectSuggestion('${val}', 'mls')"><i class="fas fa-hashtag"></i><span>${val}</span></div>`;
+          });
+        }
+        if (matchAddresses.size > 0) {
+          htmlOutput += `<div class="suggestion-group-title">Addresses</div>`;
+          matchAddresses.forEach(val => {
+            htmlOutput += `<div class="suggestion-item" onclick="selectSuggestion('${val}', 'txt')"><i class="fas fa-map-marker-alt"></i><span>${val}</span></div>`;
+          });
+        }
+        if (matchNeighborhoods.size > 0) {
+          htmlOutput += `<div class="suggestion-group-title">Neighborhoods</div>`;
+          matchNeighborhoods.forEach(val => {
+            htmlOutput += `<div class="suggestion-item" onclick="selectSuggestion('${val}', 'txt')"><i class="fas fa-tree"></i><span>${val}</span></div>`;
+          });
+        }
+        if (matchCities.size > 0) {
+          htmlOutput += `<div class="suggestion-group-title">Cities</div>`;
+          matchCities.forEach(val => {
+            htmlOutput += `<div class="suggestion-item" onclick="selectSuggestion('${val}', 'txt')"><i class="fas fa-city"></i><span>${val}</span></div>`;
+          });
+        }
+        if (matchZips.size > 0) {
+          htmlOutput += `<div class="suggestion-group-title">Zip Codes</div>`;
+          matchZips.forEach(val => {
+            htmlOutput += `<div class="suggestion-item" onclick="selectSuggestion('${val}', 'txt')"><i class="fas fa-mail-bulk"></i><span>${val}</span></div>`;
+          });
+        }
+
+        if (htmlOutput) {
+          suggestionsBox.innerHTML = htmlOutput;
+          suggestionsBox.style.display = 'block';
+        } else {
+          suggestionsBox.style.display = 'none';
+        }
+      })
+      .catch(() => {
+        suggestionsBox.style.display = 'none';
+      });
+  }, 300);
+});
+
+// Dropdown click processing router handler
+function selectSuggestion(value, targetType) {
+  suggestionsBox.style.display = 'none';
+  if (targetType === 'mls') {
+    // Navigate straight to detail view if they select an explicit MLS token
+    window.location.href = `/listings/${value}`;
+  } else {
+    searchInput.value = value;
+    doHeroSearch();
+  }
+}
+
+// Dismiss suggestion modal container if client clicks outside focus
+document.addEventListener('click', (e) => {
+  if (!e.target.closest('.search-input-container')) {
+    suggestionsBox.style.display = 'none';
+  }
+});
+
+searchInput.addEventListener('keypress', e => {
+  if (e.key === 'Enter') {
+    suggestionsBox.style.display = 'none';
+    doHeroSearch();
+  }
 });
 </script>

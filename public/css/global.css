@@ -1680,14 +1680,23 @@ footer {
   .nav-phone { display: none; }
 }
 
-/* Animations */
-@keyframes fadeUp {
-  from { opacity: 0; transform: translateY(20px); }
-  to { opacity: 1; transform: translateY(0); }
-}
+/* ==========================================================================
+   INTERSECTION OBSERVER VISUAL TRIGGERS
+   Controls dynamic viewport reveal animations asynchronously via main.js
+   ========================================================================== */
 .fade-up {
-  animation: fadeUp 0.6s ease forwards;
+  opacity: 0 !important;
+  transform: translateY(20px) !important;
+  transition: opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1), 
+              transform 0.6s cubic-bezier(0.4, 0, 0.2, 1) !important;
+  animation: none !important;
 }
-.fade-up-delay-1 { animation-delay: 0.1s; opacity: 0; }
-.fade-up-delay-2 { animation-delay: 0.2s; opacity: 0; }
-.fade-up-delay-3 { animation-delay: 0.3s; opacity: 0; }
+
+.fade-up.visible {
+  opacity: 1 !important;
+  transform: translateY(0) !important;
+}
+
+.fade-up-delay-1 { transition-delay: 0.1s !important; }
+.fade-up-delay-2 { transition-delay: 0.2s !important; }
+.fade-up-delay-3 { transition-delay: 0.3s !important; }

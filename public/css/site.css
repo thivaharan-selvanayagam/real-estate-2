@@ -53,19 +53,24 @@
 .btn-lg { padding: 16px 36px; font-size: 12px; }
 
 /* ---- HERO SEARCH BAR ---- */
+.hero {
+  overflow: visible !important;
+  z-index: 10 !important;
+}
 .hero-search-bar {
   position: absolute;
   bottom: 0;
   left: 0;
   right: 0;
-  z-index: 3;
+  z-index: 11 !important;
   padding: 0 0 40px;
+  overflow: visible !important;
 }
 .quick-search-bar {
   display: flex;
   background: var(--white);
   border-radius: 4px;
-  overflow: hidden;
+  overflow: visible !important;
   box-shadow: var(--shadow-lg);
   max-width: 700px;
   margin: 0 auto;
@@ -94,6 +99,59 @@
 .quick-search-bar .btn {
   border-radius: 0;
   padding: 18px 28px;
+}
+
+/* ---- LIVE AUTO-SUGGEST ENGINE STYLES ---- */
+.search-input-container {
+  flex: 1;
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+.search-suggestions-box {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background: var(--white);
+  border-radius: 0 0 4px 4px;
+  box-shadow: var(--shadow-lg);
+  max-height: 320px;
+  overflow-y: auto;
+  z-index: 99999 !important;
+  display: none;
+  text-align: left;
+  border-top: 1px solid var(--cream-dark);
+}
+.suggestion-group-title {
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--gold);
+  background: var(--cream);
+  padding: 8px 16px;
+  font-weight: 700;
+}
+.suggestion-item {
+  padding: 11px 16px;
+  font-size: 13.5px;
+  color: var(--text-dark);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  transition: var(--transition);
+  border-bottom: 1px solid rgba(0,0,0,0.02);
+}
+.suggestion-item:hover {
+  background: var(--cream);
+  color: var(--navy);
+}
+.suggestion-item i {
+  color: var(--text-light);
+  width: 16px;
+  font-size: 12px;
+  text-align: center;
 }
 
 /* ---- SECTION HEADERS ---- */
@@ -367,7 +425,6 @@
   line-height: 1.8;
   margin-bottom: 24px;
 }
-.testimonial-author { color: var(--gold-light); }
 
 /* ---- CTA SECTION ---- */
 .cta-section { background: var(--navy); padding: 48px 0; }
@@ -891,12 +948,12 @@ select.calc-input { padding: 12px 14px; cursor: pointer; }
 .nav-dropdown-menu::after {
   content: '';
   position: absolute;
-  top: -16px;         /* Reaches up exactly 16px to touch the parent nav bar */
+  top: -16px;         
   left: 0;
   width: 100%;
-  height: 16px;       /* Forms a solid, transparent bridge block */
+  height: 16px;       
   background: transparent;
-  z-index: -1;        /* Sits cleanly behind the visual triangle arrow */
+  z-index: -1;        
 }
 .nav-dropdown:hover .nav-dropdown-menu,
 .nav-dropdown:focus-within .nav-dropdown-menu {
