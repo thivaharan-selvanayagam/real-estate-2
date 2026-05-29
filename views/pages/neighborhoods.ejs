@@ -2,7 +2,7 @@
 
 <div class="page-hero">
   <div class="page-hero-bg">
-    <img src="https://images.unsplash.com/photo-1449844908441-8829872d2607?w=1400&q=80" alt="Neighborhoods">
+    <img src="https://images.unsplash.com/photo-1449844908441-8829872d2607?w=1400&q=80" alt="Greater Toronto Area Neighborhoods">
   </div>
   <div class="page-hero-overlay"></div>
   <div class="page-hero-content"><h1>Neighborhoods</h1></div>
@@ -14,18 +14,59 @@
       <span class="section-label">Where We Serve</span>
       <h2>Areas of Expertise</h2>
     </div>
+    
     <div class="neighborhoods-grid">
-      <% const neighborhoods = [
-        { name: 'Bastrop', desc: 'Charming historic downtown, scenic river views, and a tight-knit community. Ideal for families and retirees.', img: 'https://images.unsplash.com/photo-1570168007204-dfb528c6958f?w=600&q=70' },
-        { name: 'Bastrop County', desc: 'Wide-open spaces, ranch properties, and peaceful rural living just outside the city.', img: 'https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?w=600&q=70' },
-        { name: 'Smithville', desc: 'A quaint, artsy community known for its beautiful downtown and friendly neighbors.', img: 'https://images.unsplash.com/photo-1501854140801-50d01698950b?w=600&q=70' },
-        { name: 'Elgin', desc: 'Fast-growing area with affordable housing and easy access to Austin and surrounding areas.', img: 'https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=600&q=70' },
-        { name: 'Del Valle', desc: 'Suburban community with proximity to Austin-Bergstrom Airport and major employment corridors.', img: 'https://images.unsplash.com/photo-1472214103451-9374bd1c798e?w=600&q=70' },
-        { name: 'Austin', desc: 'The vibrant capital of Texas — world-class dining, culture, tech hub, and live music capital.', img: 'https://images.unsplash.com/photo-1531218150217-54595bc2b934?w=600&q=70' },
-        { name: 'Cedar Creek', desc: 'Peaceful rural community with large lots, mature trees, and easy access to Bastrop.', img: 'https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=600&q=70' },
-        { name: 'McDade', desc: 'Small-town charm with agricultural roots and growing residential development.', img: 'https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=600&q=70' },
-        { name: 'Lockhart', desc: 'The BBQ Capital of Texas, with a welcoming community and affordable real estate options.', img: 'https://images.unsplash.com/photo-1416339684178-3a239570f315?w=600&q=70' },
-      ] %>
+      <% 
+        // Migrated to high-end Greater Toronto and Durham/York Region target clusters
+        const neighborhoods = [
+          { 
+            name: 'Toronto', 
+            desc: `Canada's dynamic financial and cultural heart. A magnificent tapestry of iconic high-rises, distinct historic communities, and top-tier luxury real estate options.`, 
+            img: 'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=600&q=70' 
+          },
+          { 
+            name: 'Markham', 
+            desc: `A premier high-tech hub blending upscale heritage settings like Unionville with beautifully master-planned master-planned estate properties and top-ranking schools.`, 
+            img: 'https://images.unsplash.com/photo-1568605114967-8130f3a36994?w=600&q=70' 
+          },
+          { 
+            name: 'Stouffville', 
+            desc: `An enchanting community offering a gorgeous rural escape, rich conservation parklands, and expansive country homes just moments from urban amenities.`, 
+            img: 'https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=600&q=70' 
+          },
+          { 
+            name: 'Pickering', 
+            desc: `Breathtaking waterfront living along Lake Ontario featuring a smooth mix of thriving commercial centers, lakeside trails, and emerging residential spaces.`, 
+            img: 'https://images.unsplash.com/photo-1513584684374-8bab748fbf90?w=600&q=70' 
+          },
+          { 
+            name: 'Ajax', 
+            desc: `A diverse, highly connected community famous for its untouched continuous natural waterfront, exceptional transit links, and family-oriented neighborhoods.`, 
+            img: 'https://images.unsplash.com/photo-1600585154526-990dced4db0d?w=600&q=70' 
+          },
+          { 
+            name: 'Oshawa', 
+            desc: `The rapidly expanding industrial and educational anchor city of Durham Region, boasting great real estate choices and modern infrastructure upgrades.`, 
+            img: 'https://images.unsplash.com/photo-1600566753376-12c8ab7fb75b?w=600&q=70' 
+          },
+          { 
+            name: 'Mississauga', 
+            desc: `A massive modern metropolis offering custom executive lakeside properties in Port Credit, a dramatic skyline, and central financial sectors.`, 
+            img: 'https://images.unsplash.com/photo-1600573472591-ee6b68d14c68?w=600&q=70' 
+          },
+          { 
+            name: 'Brampton', 
+            desc: `One of Canada's fastest-growing residential markets, distinguished by its robust civic infrastructure, beautiful parks, and active layout choices.`, 
+            img: 'https://images.unsplash.com/photo-1602941525421-8f8b81d3edbb?w=600&q=70' 
+          },
+          { 
+            name: 'Vaughan', 
+            desc: `A highly prestigious landscape containing affluent pockets like Woodbridge, fine custom architectural estates, and vibrant entertainment destinations.`, 
+            img: 'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=600&q=70' 
+          }
+        ]; 
+      %>
+      
       <% neighborhoods.forEach(n => { %>
       <a href="/home-search?q=<%= encodeURIComponent(n.name) %>" class="neighborhood-card" style="position:relative;cursor:pointer;border-radius:4px;overflow:hidden;display:block;">
         <img src="<%= n.img %>" alt="<%= n.name %>" style="width:100%;height:200px;object-fit:cover;transition:transform 0.4s ease;">
@@ -55,7 +96,7 @@
   <div class="work-with-overlay"></div>
   <div class="container work-with-content">
     <h2>Work With Rajivan</h2>
-    <p>With a passion for real estate and years of experience in sales and negotiation, Rajivan ensures that every client gets top-tier service. Call him today to see how he can help you navigate the Bastrop real estate market with confidence.</p>
+    <p>With a passion for real estate and years of experience in sales and negotiation, Rajivan ensures that every client gets top-tier service. Call him today to see how he can help you navigate the Greater Toronto Area real estate market with confidence.</p>
     <a href="/contact" class="btn btn-primary btn-lg mt-32">Let's Connect</a>
   </div>
 </section>

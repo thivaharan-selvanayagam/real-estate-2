@@ -1,6 +1,19 @@
 <%- include('../partials/header') %>
 
 <style>
+  /* ==========================================================================
+     HERO BACKGROUND VIDEO STYLING
+     Ensures smooth, full-cover playback without affecting text readability
+     ========================================================================== */
+  .hero-bg video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0.35; /* Matches your luxury branding contrast rules */
+    position: absolute;
+    inset: 0;
+  }
+
   /* Split Promo Banner Elements */
   .split-promo-section {
     background: var(--cream);
@@ -94,9 +107,7 @@
     box-shadow: var(--shadow-md);
   }
 
-  /* ==========================================================================
-     NEW SECTION: LUXURY NAVIGATION TRIPLE CARD GRID (bg-navy)
-     ========================================================================== */
+  /* LUXURY NAVIGATION TRIPLE CARD GRID (bg-navy) */
   .services-banner-section {
     background: var(--navy);
     padding: 100px 0;
@@ -177,18 +188,17 @@
 
 <section class="hero">
   <div class="hero-bg">
-    <img src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=1600&q=80" alt="Luxury Home">
+    <video id="heroVideo" autoplay loop muted playsinline poster="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=1600&q=80">
+      <source src="https://player.vimeo.com/external/435674703.hd.mp4?s=9f0a4f5f5906806bc8651c6c97a55efef7e4b2d1&profile_id=170&oauth2_token_id=57447761" type="video/mp4">
+      <img src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=1600&q=80" alt="Luxury Home Background Fallback">
+    </video>
   </div>
   <div class="hero-overlay"></div>
   <div class="hero-content">
     <span class="section-label">Royal Lepage Associates Realty</span>
     <h1>Rajivan Varatharajah</h1>
-    <!-- <p class="hero-sub">Expert Buyer, Seller, and Investment Services</p> -->
     <p>Serving Durham, York and Greater Toronto Area</p>
-    <div style="display:flex;gap:16px;justify-content:center;flex-wrap:wrap;">
-      <!-- <a href="/home-search" class="btn btn-primary btn-lg">Search Homes</a>
-      <a href="/home-valuation" class="btn btn-outline-light btn-lg">Home Valuation</a> -->
-    </div>
+    <div style="display:flex;gap:16px;justify-content:center;flex-wrap:wrap;"></div>
   </div>
   <div class="hero-search-bar">
     <div class="container">
@@ -281,8 +291,7 @@
         <span class="section-label">About</span>
         <h2>Meet Rajivan</h2>
         <p>Your trusted realtor and seasoned mortgage broker with over 10 years in the industry. While my professional expertise spans over 7 years as a realtor and 10 years as a mortgage broker, my life outside of real estate is equally fulfilling. I'm a devoted family man, relishing precious moments with my wife and two daughters, and I have a passion for cars. Of course, my heart truly belongs to real estate. My focus areas include resale, catering to newcomers, and guiding first-time buyers. What sets me apart? It's my unwavering commitment to personalized service, where I delve deep into your unique needs and goals.</p>
-        <p style="margin-top:16px;">I leverage my extensive local market knowledge, masterful negotiation skills, and transparent communication to ensure your real estate journey is seamless and successful. With a proven history of delivering results and a willingness to go the extra mile, I'm your trusted partner in the home buying or selling process. Let's make your real estate dreams come true!
-</p>
+        <p style="margin-top:16px;">I leverage my extensive local market knowledge, masterful negotiation skills, and transparent communication to ensure your real estate journey is seamless and successful. With a proven history of delivering results and a willingness to go the extra mile, I'm your trusted partner in the home buying or selling process. Let's make your real estate dreams come true!</p>
         <div style="display:flex;gap:16px;margin-top:32px;flex-wrap:wrap;">
           <a href="/about" class="btn btn-primary">Learn More</a>
           <a href="/contact" class="btn btn-outline">Let's Connect</a>
@@ -347,16 +356,19 @@
       <h2>Neighborhood Guides</h2>
     </div>
     <div class="neighborhoods-grid">
-      <% const hoods = [
-        { name: 'Bastrop', img: 'https://images.unsplash.com/photo-1570168007204-dfb528c6958f?w=600&q=70' },
-        { name: 'Bastrop County', img: 'https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?w=600&q=70' },
-        { name: 'Smithville', img: 'https://images.unsplash.com/photo-1501854140801-50d01698950b?w=600&q=70' },
-        { name: 'Elgin', img: 'https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=600&q=70' },
-        { name: 'Del Valle', img: 'https://images.unsplash.com/photo-1472214103451-9374bd1c798e?w=600&q=70' },
-        { name: 'Austin', img: 'https://images.unsplash.com/photo-1531218150217-54595bc2b934?w=600&q=70' },
-      ] %>
+      <% 
+        // Added explicit routing URLs directly to each target city object
+        const hoods = [
+          { name: 'Toronto', img: 'https://images.unsplash.com/photo-1570168007204-dfb528c6958f?w=600&q=70', url: '/home-search?q=Toronto' },
+          { name: 'Stouffville', img: 'https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?w=600&q=70', url: '/home-search?q=Stouffville' },
+          { name: 'Markham', img: 'https://images.unsplash.com/photo-1501854140801-50d01698950b?w=600&q=70', url: '/home-search?q=Markham' },
+          { name: 'Pickering', img: 'https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=600&q=70', url: '/home-search?q=Pickering' },
+          { name: 'Ajax', img: 'https://images.unsplash.com/photo-1472214103451-9374bd1c798e?w=600&q=70', url: '/home-search?q=Ajax' },
+          { name: 'Oshawa', img: 'https://images.unsplash.com/photo-1531218150217-54595bc2b934?w=600&q=70', url: '/home-search?q=Oshawa' },
+        ] 
+      %>
       <% hoods.forEach(h => { %>
-      <a href="/neighborhoods" class="neighborhood-card">
+      <a href="<%= h.url %>" class="neighborhood-card">
         <img src="<%= h.img %>" alt="<%= h.name %>">
         <div class="neighborhood-overlay">
           <h3><%= h.name %></h3>
@@ -529,6 +541,26 @@ searchInput.addEventListener('keypress', e => {
   if (e.key === 'Enter') {
     suggestionsBox.style.display = 'none';
     doHeroSearch();
+  }
+});
+
+// Hardware Autoplay Safety Overrides
+document.addEventListener('DOMContentLoaded', () => {
+  const video = document.getElementById('heroVideo');
+  if (video) {
+    // Attempt normal execution play track
+    video.play().catch(() => {
+      console.log('Browser safety lock intercepted autoplay. Waiting for user interaction to unfreeze video loop...');
+      
+      // Fallback: Wake up the video loop the absolute millisecond the user interacts with the page
+      const wakeVideo = () => {
+        video.play();
+        document.removeEventListener('click', wakeVideo);
+        document.removeEventListener('touchstart', wakeVideo);
+      };
+      document.addEventListener('click', wakeVideo);
+      document.addEventListener('touchstart', wakeVideo);
+    });
   }
 });
 </script>
