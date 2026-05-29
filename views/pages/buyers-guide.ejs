@@ -1,56 +1,282 @@
 <%- include('../partials/header') %>
 
+<style>
+
+  /* Base Layout Architecture */
+  .editorial-guide-section {
+    background: var(--white);
+    padding: 100px 0;
+    padding-bottom: 0px;
+    overflow: hidden;
+  }
+  
+  .intro-text-block {
+    max-width: 760px;
+    margin: 0 auto 80px auto;
+    text-align: center;
+  }
+  
+  /* Staggered Alternating Grid System */
+  .staggered-editorial-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    width: 100%;
+    min-height: 540px;
+    background: var(--white);
+  }
+  
+  /* Alternating Background Shading For Ultimate Premium Contrast */
+  .staggered-editorial-row:nth-child(even) {
+    background: var(--cream);
+  }
+  
+  /* Forces the layout to reverse order on every even instance cleanly */
+  .staggered-editorial-row:nth-child(even) .editorial-media-frame {
+    order: 2;
+  }
+  .staggered-editorial-row:nth-child(even) .editorial-text-panel {
+    order: 1;
+    padding: 60px 10% 60px 8%;
+  }
+
+  /* Media Frame Image Container */
+  .editorial-media-frame {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    min-height: 540px;
+    overflow: hidden;
+  }
+  .editorial-media-frame img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    position: absolute;
+    inset: 0;
+    transition: transform 1s cubic-bezier(0.25, 1, 0.5, 1);
+  }
+  .staggered-editorial-row:hover .editorial-media-frame img {
+    transform: scale(1.03);
+  }
+
+  /* Typography & Content Layout Panels */
+  .editorial-text-panel {
+    padding: 60px 8% 60px 10%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+  }
+  
+  .step-badge-counter {
+    font-family: var(--font-body);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 16px;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .step-badge-counter::after {
+    content: '';
+    width: 24px;
+    height: 1px;
+    background: var(--gold);
+    display: inline-block;
+  }
+  
+  .editorial-text-panel h3 {
+    font-family: var(--font-heading);
+    font-size: clamp(26px, 3.5vw, 36px);
+    font-weight: 400;
+    color: var(--navy);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    margin-bottom: 20px;
+    line-height: 1.2;
+  }
+  
+  .editorial-text-panel p {
+    font-family: var(--font-body);
+    font-size: 14.5px;
+    color: var(--text-mid);
+    line-height: 1.85;
+    font-weight: 400;
+  }
+
+  /* Bottom Actions Section */
+  .guide-footer-actions {
+    padding: 100px 0;
+    background: var(--cream);
+    text-align: center;
+    border-top: 1px solid var(--cream-dark);
+  }
+
+  /* Responsive Mobile Matrix Breaks */
+  @media (max-width: 900px) {
+    .editorial-guide-section {
+      padding: 60px 0 0 0;
+    }
+    .intro-text-block {
+      margin-bottom: 48px;
+    }
+    .staggered-editorial-row {
+      grid-template-columns: 1fr !important; /* Stack vertically into single column panels */
+      min-height: auto !important;
+    }
+    .editorial-media-frame {
+      min-height: 360px !important;
+      height: 360px !important;
+      order: 1 !important; /* Force image always to top on mobile views */
+    }
+    .editorial-text-panel {
+      order: 2 !important;
+      padding: 48px 24px !important;
+      align-items: center !important;
+      text-align: center !important;
+    }
+    .step-badge-counter {
+      justify-content: center;
+    }
+    .step-badge-counter::after {
+      display: none;
+    }
+    .guide-footer-actions {
+      padding: 64px 24px;
+    }
+    .guide-footer-actions .btn {
+      width: 100%;
+      margin: 8px 0 !important;
+      justify-content: center;
+    }
+  }
+</style>
+
 <div class="page-hero">
   <div class="page-hero-bg">
-    <img src="https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=1400&q=80" alt="Buyer's Guide">
+    <img src="https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=1400&q=80" alt="Buyer's Guide Blueprint">
   </div>
   <div class="page-hero-overlay"></div>
-  <div class="page-hero-content"><h1>Buyer's Guide</h1></div>
+  <div class="page-hero-content">
+    <h1 class="display-title">Buyer's Guide</h1>
+  </div>
 </div>
 
-<section class="section bg-cream">
+<section class="editorial-guide-section">
   <div class="container">
-    <div class="section-header text-center mb-48">
+    <div class="intro-text-block">
       <span class="section-label">Your Roadmap</span>
       <h2>Steps to Buying Your Home</h2>
-      <p style="color:var(--text-mid);max-width:600px;margin:16px auto 0;">Buying a home is one of the most significant financial decisions you'll make. Rajivan is here to guide you every step of the way.</p>
+      <div style="width: 40px; height: 1px; background: var(--gold); margin: 16px auto;"></div>
+      <p>Buying property is one of the most significant financial milestones of your life. Rajivan Varatharajah provides a tailored, step-by-step framework to navigate the competitive market with absolute confidence.</p>
     </div>
-    <div class="guide-steps">
-      <% const buyerSteps = [
-        { title: 'Define Your Goals', text: 'Determine your budget, desired location, home size, and must-have features. Understanding what you need versus what you want helps narrow your search.' },
-        { title: 'Get Pre-Approved', text: 'Contact a mortgage lender to get pre-approved for a loan. This shows sellers you\'re serious and gives you a clear picture of your budget.' },
-        { title: 'Start Your Home Search', text: 'Work with Rajivan to tour homes that match your criteria. Use our home search tool to explore available listings in Bastrop and surrounding areas.' },
-        { title: 'Make an Offer', text: 'Once you find the right home, Rajivan will help you craft a competitive offer based on market conditions and comparable sales.' },
-        { title: 'Home Inspection', text: 'Hire a professional inspector to evaluate the property\'s condition. This protects you from unexpected repairs and gives leverage for negotiations.' },
-        { title: 'Finalize Financing', text: 'Work with your lender to finalize your mortgage. Provide all required documents promptly to keep the process moving.' },
-        { title: 'Closing Day', text: 'Review and sign all closing documents, pay closing costs, and receive your keys. Congratulations — you\'re a homeowner!' },
-      ] %>
-      <% buyerSteps.forEach((s, i) => { %>
-      <div class="guide-step">
-        <div class="guide-step-num"><%= i + 1 %></div>
-        <div class="guide-step-text">
-          <h4><%= s.title %></h4>
-          <p><%= s.text %></p>
+  </div>
+
+  <div class="editorial-matrix-wrapper">
+    <% 
+      const buyerSteps = [
+        { 
+          title: 'Research', 
+          text: `Do you already know where you want to buy? If you want a condo, townhome, or single-family home? Which features do you like and dislike? What’s available on the market now? If you answered no to any of these questions, now is the time to start researching. In addition to looking for homes that interest you, also take note of any changes in asking prices. This could give you valuable insight into housing trends in specific neighborhoods and help you when the time comes to make an offer.`,
+          img: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=1000&q=80'
+        },
+        { 
+          title: 'Decide on Your Budget', 
+          text: `Notice I said to decide on your budget—not determine how much the mortgage company will give you. In many cases, a mortgage company will pre-approve you for more than you’re comfortable spending, which is why you need to determine the monthly payment you feel comfortable with before talking to a lender. This likely includes doing a full household budget and taking into consideration what changes other than a mortgage payment will occur once you move into your new home. If you’ve lived in an apartment or with roommates, you may overlook new expenses like garbage, water, or HOA fees that could easily blow your budget.`,
+          img: 'https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?w=1000&q=80'
+        },
+        { 
+          title: 'Get Prequalified', 
+          text: `Just because you think you can afford a certain payment every month doesn’t mean the mortgage company will agree. Just as they may approve you for too large of an amount, they may also approve you for a lesser amount or deny you a mortgage altogether. Lack of time at a job, insufficient credit, past bankruptcies, or other financial issues can cause major problems when trying to secure a mortgage. Before you get your heart set on a home, talk to a mortgage professional to find out what amount you can qualify for. This will also be an advantage when you make an offer on a home, as some sellers won’t entertain offers from those who aren’t already prequalified for a loan.`,
+          img: 'https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=1000&q=80'
+        },
+        { 
+          title: 'Choose a Real Estate Agent', 
+          text: `Can you shop for, look at, and ultimately make an offer on a home without a real estate agent? Technically yes, but why would you when it costs you nothing for an agent like me to take much of the stress off your shoulders? Not only will I help identify properties you might be interested in, arrange showings, and ultimately handle the offer process, but I also have a knowledge of the market that you don’t possess. Finding the perfect home can be a daunting task, this is where my expertise and wealth of knowledge come into play. Let me show you around some homes that meet your dream home criteria so you can find the one that's right for you.`,
+          img: 'https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?w=1000&q=80'
+        },
+        { 
+          title: 'Find the Right Home', 
+          text: `This should be the most enjoyable step of the entire process (other than moving in!). I will arrange showings of homes you’re interested in that are within your price range. Take notes about what you like and don’t like, and make sure to pay attention to details. Turn light switches on and off, open and close doors, and run the faucets in various rooms. Don’t limit your inspection to the home itself. Make sure to take time to explore the neighborhood and keep an eye on traffic at certain times of the day, the parking situation, and how close it is to necessities like schools and grocery stores.`,
+          img: 'https://images.unsplash.com/photo-1600585154526-990dced4db0d?w=1000&q=80'
+        },
+        { 
+          title: 'Make an Offer', 
+          text: `Once you have selected the perfect home, work with your agent to craft a fair offer based on the value of comparable homes on the market. Depending on what the home is listed at and whether the current environment is a buyer’s or seller’s market, your offer may be below, at, or even above the asking price. I will be able to help you negotiate if you receive a counteroffer and reach an agreement. At this point, the house will go into escrow.`,
+          img: 'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=1000&q=80'
+        },
+        { 
+          title: 'Have the Home Inspected', 
+          text: `In most cases, your offer will be contingent on having the home inspected to ensure there is no major structural damage or large repairs needed. I can help you arrange this, and you can schedule it within days of making an offer. If there are no major issues, the process goes to step eight. If there is, you can renegotiate your offer based on what needs to be fixed, or you can withdraw it.`,
+          img: 'https://images.unsplash.com/photo-1613977257363-707ba9348227?w=1000&q=80'
+        },
+        { 
+          title: 'Select Your Loan', 
+          text: `Now is the time to go back to the mortgage lender who pre-approved or pre-qualified you and choose your mortgage. You will be presented with various options based on your unique financial situation, including fixed-rate, variable-rate, 15-year, 30-year, or special programs such as VA loans or FHA loans. Work with your mortgage lender to select the option you feel the most comfortable with.`,
+          img: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=1000&q=80'
+        },
+        { 
+          title: 'Get a Home Appraisal', 
+          text: `Your lender will have your new home appraised so they have their independent value of it. The appraisal is to ensure that all parties involved are paying a fair price for the house.`,
+          img: 'https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?w=1000&q=80'
+        },
+        { 
+          title: ' Finish Paperwork', 
+          text: `No one looks forward to all the paperwork involved in buying a home, but it’s a necessary part of the process. Fortunately, everything will be arranged by your lender and title company and, when you’re finished, you’ll know you are the legal owner of your new home.`,
+          img: 'https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=1000&q=80'
+        }
+      ];
+    %>
+
+    <% buyerSteps.forEach((step, index) => { %>
+      <div class="staggered-editorial-row">
+        <div class="editorial-media-frame">
+          <img src="<%= step.img %>" alt="<%= step.title %>" loading="lazy">
+        </div>
+        
+        <div class="editorial-text-panel">
+          <div class="step-badge-counter">Phase 0<%= index + 1 %></div>
+          <h3><%= step.title %></h3>
+          <p><%= step.text %></p>
         </div>
       </div>
-      <% }) %>
-    </div>
-    <div class="text-center mt-48">
-      <a href="/home-search" class="btn btn-primary btn-lg">Start Searching</a>
-      <a href="/contact" class="btn btn-outline btn-lg" style="margin-left:16px;">Talk to Rajivan</a>
+    <% }) %>
+  </div>
+</section>
+
+<section class="guide-footer-actions">
+  <div class="container">
+    <h2 style="font-family: var(--font-heading); font-size: clamp(24px, 3.5vw, 36px); font-weight: 400; color: var(--navy); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 32px;">Ready to Begin Your Search?</h2>
+    <div style="display: flex; justify-content: center; gap: 16px; flex-wrap: wrap;">
+      <a href="/home-search" class="btn btn-primary btn-lg">Browse Live Listings</a>
+      <a href="/contact" class="btn btn-outline btn-lg">Schedule Consultation</a>
     </div>
   </div>
 </section>
 
-<section class="cta-section">
+<section class="cta-section" style="border-top: 1px solid rgba(255,255,255,0.05);">
   <div class="container">
     <div class="cta-inner">
       <div>
-        <span class="section-label">Calculate Costs</span>
-        <h2>Estimate Your Monthly Payment</h2>
+        <span class="section-label">Financial Analytics</span>
+        <h2>Estimate Your Real Estate Carrying Costs</h2>
       </div>
-      <a href="/mortgage-calculator" class="btn btn-primary btn-lg">Mortgage Calculator</a>
+      <a href="/mortgage-calculator" class="btn btn-primary btn-lg">Launch Calculator Matrix</a>
     </div>
+  </div>
+</section>
+
+<section class="work-with" style="background-image:url('https://images.unsplash.com/photo-1570168007204-dfb528c6958f?w=1400&70');">
+  <div class="work-with-overlay"></div>
+  <div class="container work-with-content">
+    <span class="section-label">Start Today</span>
+    <h2>Work With Rajivan</h2>
+    <p>With a passion for real estate and years of experience in sales and negotiation, Rajivan ensures every client gets top-tier service. Call him today to see how he can help you navigate the real estate market with confidence.</p>
+    <a href="/contact" class="btn btn-primary btn-lg mt-32">Let's Connect</a>
   </div>
 </section>
 

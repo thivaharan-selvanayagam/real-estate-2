@@ -1,18 +1,193 @@
 <%- include('../partials/header') %>
 
+<style>
+  /* Split Promo Banner Elements */
+  .split-promo-section {
+    background: var(--cream);
+    padding: 120px 0 0 0;
+    position: relative;
+    z-index: 5;
+    width: 100%;
+  }
+  .split-banner-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    width: 100%;
+    margin-top: 56px;
+  }
+  .split-panel {
+    position: relative;
+    height: 560px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    overflow: hidden;
+    text-decoration: none;
+    color: var(--white);
+  }
+  .split-panel-bg {
+    position: absolute;
+    inset: 0;
+    background-size: cover;
+    background-position: center;
+    transition: transform 0.8s cubic-bezier(0.25, 1, 0.5, 1);
+    z-index: 1;
+  }
+  .split-panel:hover .split-panel-bg {
+    transform: scale(1.04);
+  }
+  .split-panel-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.35) 0%, rgba(0, 0, 0, 0.6) 100%);
+    z-index: 2;
+    transition: var(--transition);
+  }
+  .split-panel:hover .split-panel-overlay {
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.45) 0%, rgba(0, 0, 0, 0.7) 100%);
+  }
+  .split-panel-content {
+    position: relative;
+    z-index: 3;
+    padding: 0 40px;
+    width: 100%;
+    max-width: 560px;
+  }
+  .split-panel-content h3 {
+    font-family: var(--font-heading);
+    font-size: clamp(28px, 3.5vw, 42px);
+    font-weight: 400;
+    color: var(--white);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    margin-bottom: 12px;
+  }
+  .split-panel-content p {
+    font-family: var(--font-body);
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.85);
+    font-weight: 400;
+    margin-bottom: 32px;
+    letter-spacing: 0.02em;
+  }
+  .split-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: #e9decb;
+    color: var(--navy);
+    font-family: var(--font-body);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    padding: 14px 44px;
+    border-radius: 2px;
+    transition: var(--transition);
+  }
+  .split-panel:hover .split-btn {
+    background: var(--white);
+    color: var(--navy);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+  }
+
+  /* ==========================================================================
+     NEW SECTION: LUXURY NAVIGATION TRIPLE CARD GRID (bg-navy)
+     ========================================================================== */
+  .services-banner-section {
+    background: var(--navy);
+    padding: 100px 0;
+    width: 100%;
+  }
+  .services-banner-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 32px;
+  }
+  .service-banner-card {
+    position: relative;
+    height: 500px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    overflow: hidden;
+    text-decoration: none;
+    padding-bottom: 48px;
+  }
+  .service-banner-bg {
+    position: absolute;
+    inset: 0;
+    background-size: cover;
+    background-position: center;
+    transition: transform 0.8s cubic-bezier(0.25, 1, 0.5, 1);
+    z-index: 1;
+  }
+  .service-banner-card:hover .service-banner-bg {
+    transform: scale(1.05);
+  }
+  .service-banner-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(13, 27, 42, 0.85) 0%, rgba(13, 27, 42, 0.2) 60%, transparent 100%);
+    z-index: 2;
+  }
+  .service-banner-card h3 {
+    position: relative;
+    z-index: 3;
+    color: var(--white);
+    font-family: var(--font-body);
+    font-size: 13.5px;
+    font-weight: 600;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    text-align: center;
+    margin: 0;
+    transition: var(--transition);
+  }
+  .service-banner-card:hover h3 {
+    color: var(--gold-light);
+  }
+
+  /* Responsive Control Adjustments */
+  @media (max-width: 900px) {
+    .split-promo-section {
+      padding-top: 80px;
+    }
+    .split-banner-grid {
+      grid-template-columns: 1fr !important;
+    }
+    .split-panel {
+      height: 460px !important;
+    }
+    .services-banner-section {
+      padding: 64px 0;
+    }
+    .services-banner-grid {
+      grid-template-columns: 1fr !important;
+      gap: 24px !important;
+    }
+    .service-banner-card {
+      height: 400px !important;
+    }
+  }
+</style>
+
 <section class="hero">
   <div class="hero-bg">
     <img src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=1600&q=80" alt="Luxury Home">
   </div>
   <div class="hero-overlay"></div>
-  <div class="hero-content fade-up">
+  <div class="hero-content">
     <span class="section-label">Royal Lepage Associates Realty</span>
     <h1>Rajivan Varatharajah</h1>
-    <p class="hero-sub">Expert Buyer, Seller, and Investment Services</p>
+    <!-- <p class="hero-sub">Expert Buyer, Seller, and Investment Services</p> -->
     <p>Serving Durham, York and Greater Toronto Area</p>
     <div style="display:flex;gap:16px;justify-content:center;flex-wrap:wrap;">
-      <a href="/home-search" class="btn btn-primary btn-lg">Search Homes</a>
-      <a href="/home-valuation" class="btn btn-outline-light btn-lg">Home Valuation</a>
+      <!-- <a href="/home-search" class="btn btn-primary btn-lg">Search Homes</a>
+      <a href="/home-valuation" class="btn btn-outline-light btn-lg">Home Valuation</a> -->
     </div>
   </div>
   <div class="hero-search-bar">
@@ -38,31 +213,60 @@
   </div>
 </section>
 
-<section class="section bg-cream">
+<section class="split-promo-section">
   <div class="container">
-    <div class="section-header text-center mb-48">
-      <span class="section-label">What We Do</span>
-      <h2>Helping Buyers & Sellers Succeed</h2>
+    <div class="text-center">
+      <span style="font-family: var(--font-body); font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); display: block; margin-bottom: 12px; font-weight: 600;">Find Your Next Property</span>
+      <div style="width: 40px; height: 1px; background: var(--gold); margin: 0 auto 16px;"></div>
+      <h2 style="font-family: var(--font-heading); font-size: clamp(24px, 3.5vw, 36px); font-weight: 400; letter-spacing: 0.05em; text-transform: uppercase; color: var(--navy); margin: 0;">Helping Buyers & Sellers Succeed</h2>
     </div>
-    <div class="listings-grid-3" style="gap:24px;">
-      <div class="info-card text-center">
-        <div class="info-card-icon"><i class="fas fa-home"></i></div>
-        <h3>Buying a Home</h3>
-        <p>From first showing to closing day, Rajivan guides you through every step of the purchase process.</p>
-        <a href="/home-search" class="btn btn-outline mt-16">Search Homes</a>
+  </div>
+
+  <div class="split-banner-grid">
+    <a href="/sellers-guide" class="split-panel">
+      <div class="split-panel-bg" style="background-image: url('https://images.unsplash.com/photo-1556911220-e15b29be8c8f?w=1200&q=80');"></div>
+      <div class="split-panel-overlay"></div>
+      <div class="split-panel-content">
+        <h3>Selling a Home?</h3>
+        <p>Explore my Seller's Guide.</p>
+        <span class="split-btn">Learn More</span>
       </div>
-      <div class="info-card text-center">
-        <div class="info-card-icon"><i class="fas fa-tag"></i></div>
-        <h3>Selling a Home</h3>
-        <p>Get top dollar for your property with expert pricing strategy, marketing, and negotiation.</p>
-        <a href="/home-valuation" class="btn btn-outline mt-16">Get Valuation</a>
+    </a>
+
+    <a href="/buyers-guide" class="split-panel">
+      <div class="split-panel-bg" style="background-image: url('https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=1200&q=80');"></div>
+      <div class="split-panel-overlay"></div>
+      <div class="split-panel-content">
+        <h3>Buying a Home?</h3>
+        <p>Explore my Buyer's Guide.</p>
+        <span class="split-btn">Learn More</span>
       </div>
-      <div class="info-card text-center">
-        <div class="info-card-icon"><i class="fas fa-handshake"></i></div>
+    </a>
+  </div>
+</section>
+
+<section class="services-banner-section">
+  <div class="container">
+    <div class="services-banner-grid">
+      
+      <a href="/home-search" class="service-banner-card">
+        <div class="service-banner-bg" style="background-image: url('https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=800&q=80');"></div>
+        <div class="service-banner-overlay"></div>
+        <h3>Home Search</h3>
+      </a>
+
+      <a href="/home-valuation" class="service-banner-card">
+        <div class="service-banner-bg" style="background-image: url('https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?w=800&q=80');"></div>
+        <div class="service-banner-overlay"></div>
+        <h3>Home Valuation</h3>
+      </a>
+
+      <a href="/contact" class="service-banner-card">
+        <div class="service-banner-bg" style="background-image: url('https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?w=800&q=80');"></div>
+        <div class="service-banner-overlay"></div>
         <h3>Let's Connect</h3>
-        <p>Have questions? Ready to start your real estate journey? Reach out — Rajivan is here to help.</p>
-        <a href="/contact" class="btn btn-outline mt-16">Contact Us</a>
-      </div>
+      </a>
+
     </div>
   </div>
 </section>
@@ -71,13 +275,14 @@
   <div class="container">
     <div class="meet-grid">
       <div class="meet-photo">
-        <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?w=600&q=80" alt="Rajivan Varatharajah">
+        <img src="/images/about_rajivan.webp" alt="Rajivan Varatharajah">
       </div>
       <div class="meet-content">
         <span class="section-label">About</span>
         <h2>Meet Rajivan</h2>
-        <p>Rajivan Varatharajah is a dedicated real estate professional committed to helping clients navigate the buying and selling process with confidence. With years of experience in sales leadership and expert negotiation skills, Rajivan brings a strategic, client-focused approach to every transaction.</p>
-        <p style="margin-top:16px;">Deeply rooted in the local community, he is passionate about service and actively gives back. Whether you're buying your first home, selling your property, or investing in real estate, Rajivan is ready to put his experience and dedication to work for you.</p>
+        <p>Your trusted realtor and seasoned mortgage broker with over 10 years in the industry. While my professional expertise spans over 7 years as a realtor and 10 years as a mortgage broker, my life outside of real estate is equally fulfilling. I'm a devoted family man, relishing precious moments with my wife and two daughters, and I have a passion for cars. Of course, my heart truly belongs to real estate. My focus areas include resale, catering to newcomers, and guiding first-time buyers. What sets me apart? It's my unwavering commitment to personalized service, where I delve deep into your unique needs and goals.</p>
+        <p style="margin-top:16px;">I leverage my extensive local market knowledge, masterful negotiation skills, and transparent communication to ensure your real estate journey is seamless and successful. With a proven history of delivering results and a willingness to go the extra mile, I'm your trusted partner in the home buying or selling process. Let's make your real estate dreams come true!
+</p>
         <div style="display:flex;gap:16px;margin-top:32px;flex-wrap:wrap;">
           <a href="/about" class="btn btn-primary">Learn More</a>
           <a href="/contact" class="btn btn-outline">Let's Connect</a>
@@ -208,7 +413,6 @@ function doHeroSearch() {
   window.location.href = `/home-search?q=${encodeURIComponent(q)}&type=${type}`;
 }
 
-// Global scope initialization parameters for query handling
 let debounceTimer;
 const searchInput = document.getElementById('heroSearch');
 const suggestionsBox = document.getElementById('searchSuggestions');
@@ -222,7 +426,6 @@ searchInput.addEventListener('input', () => {
     return;
   }
 
-  // Debounce network connection calls to save bandwidth limits
   debounceTimer = setTimeout(() => {
     fetch(`/api/listings?q=${encodeURIComponent(query)}&limit=15`)
       .then(res => res.json())
@@ -232,7 +435,6 @@ searchInput.addEventListener('input', () => {
           return;
         }
 
-        // Establish data indexing clusters
         const matchMLS = new Set();
         const matchAddresses = new Set();
         const matchNeighborhoods = new Set();
@@ -242,7 +444,6 @@ searchInput.addEventListener('input', () => {
         data.listings.forEach(item => {
           const lowerQuery = query.toLowerCase();
           
-          // Index MLS matches
           const mls = item.mlsNumber || item.listingId;
           if (mls && mls.toLowerCase().includes(lowerQuery)) matchMLS.add(mls);
 
@@ -251,12 +452,10 @@ searchInput.addEventListener('input', () => {
             const hood = item.address.neighborhood;
             const zip = item.address.zip;
             
-            // Index location fields
             if (city && city.toLowerCase().includes(lowerQuery)) matchCities.add(city);
             if (hood && hood.toLowerCase().includes(lowerQuery)) matchNeighborhoods.add(hood);
             if (zip && zip.toLowerCase().includes(lowerQuery)) matchZips.add(zip);
 
-            // Index absolute address lines
             const street = [item.address.streetNumber, item.address.streetName].filter(Boolean).join(' ');
             if (street && street.toLowerCase().includes(lowerQuery)) {
               matchAddresses.add(`${street}, ${city || ''}`);
@@ -264,7 +463,6 @@ searchInput.addEventListener('input', () => {
           }
         });
 
-        // Compile HTML strings
         let htmlOutput = '';
 
         if (matchMLS.size > 0) {
@@ -311,11 +509,9 @@ searchInput.addEventListener('input', () => {
   }, 300);
 });
 
-// Dropdown click processing router handler
 function selectSuggestion(value, targetType) {
   suggestionsBox.style.display = 'none';
   if (targetType === 'mls') {
-    // Navigate straight to detail view if they select an explicit MLS token
     window.location.href = `/listings/${value}`;
   } else {
     searchInput.value = value;
@@ -323,7 +519,6 @@ function selectSuggestion(value, targetType) {
   }
 }
 
-// Dismiss suggestion modal container if client clicks outside focus
 document.addEventListener('click', (e) => {
   if (!e.target.closest('.search-input-container')) {
     suggestionsBox.style.display = 'none';
