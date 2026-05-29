@@ -36,10 +36,12 @@
   <section class="section">
     <div class="container">
       <div class="detail-layout">
+        
         <div class="detail-main">
           <div style="margin-bottom:8px;"><span class="listing-badge badge-sale" style="position:relative;top:0;left:0;">For Sale</span></div>
           <h1 style="font-family:var(--font-display);font-size:clamp(28px,5vw,48px);font-weight:300;color:var(--navy);margin-bottom:8px;"><%= addr %></h1>
           <div style="font-family:var(--font-display);font-size:36px;color:var(--gold);font-weight:300;margin-bottom:24px;"><%= price %></div>
+          
           <div style="display:flex;gap:24px;flex-wrap:wrap;margin-bottom:32px;">
             <% if (beds) { %><div style="display:flex;align-items:center;gap:8px;"><i class="fas fa-bed" style="color:var(--gold);"></i><span><strong><%= beds %></strong> Bedrooms</span></div><% } %>
             <% if (baths) { %><div style="display:flex;align-items:center;gap:8px;"><i class="fas fa-bath" style="color:var(--gold);"></i><span><strong><%= baths %></strong> Bathrooms</span></div><% } %>
@@ -76,30 +78,43 @@
         </div>
 
         <div class="detail-sidebar">
-          <div class="detail-contact-card">
-            <div style="text-align:center;margin-bottom:20px;">
-              <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?w=200&q=80" alt="Rajivan" style="width:80px;height:80px;border-radius:50%;object-fit:cover;border:3px solid var(--gold);margin-bottom:12px;">
-              <div style="font-family:var(--font-display);font-size:18px;font-weight:700;color:var(--navy);">Rajivan Varatharajah</div>
-              <div style="font-size:11px;letter-spacing:0.15em;text-transform:uppercase;color:var(--gold);">Real Estate Agent</div>
-            </div>
-            <a href="tel:+16471234567" class="btn btn-primary" style="width:100%;text-align:center;margin-bottom:12px;"><i class="fas fa-phone" style="margin-right:8px;"></i>+1 (647) 123-4567</a>
+          <div class="detail-contact-card" style="display: flex; flex-direction: column; align-items: stretch; padding: 32px; background: var(--white); border-radius: 8px; box-shadow: var(--shadow-md); border-top: 3px solid var(--gold);">
             
-            <div id="showingSuccess" class="alert alert-success" style="display:none; margin-bottom: 16px;">
+            <div style="display: flex; flex-direction: column; align-items: center; text-align: center; margin-bottom: 24px; width: 100%;">
+              <img src="/images/rajivan-headshot.webp" alt="Rajivan Varatharajah" 
+                   style="width: 90px; height: 90px; border-radius: 50%; object-fit: cover; border: 3px solid var(--gold); margin: 0 auto 12px auto; display: block;">
+              <h4 style="font-family: var(--font-heading); font-size: 20px; font-weight: 600; color: var(--navy); margin: 0 0 4px 0; line-height: 1.2;">Rajivan Varatharajah</h4>
+              <span style="font-family: var(--font-body); font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--gold); font-weight: 600;">Real Estate Agent</span>
+            </div>
+            
+            <a href="tel:+16472985523" class="btn btn-primary" 
+               style="display: flex; align-items: center; justify-content: center; width: 100%; margin-bottom: 16px; box-sizing: border-box;">
+              <i class="fas fa-phone" style="margin-right: 10px; font-size: 12px;"></i>+1 (647) 298-5523
+            </a>
+            
+            <div id="showingSuccess" class="alert alert-success" style="display: none; align-items: center; gap: 8px; margin-bottom: 16px; box-sizing: border-box; width: 100%;">
               <i class="fas fa-check-circle"></i> Request sent! Rajivan will confirm shortly.
             </div>
 
-            <div style="margin-bottom:16px;">
-              <input type="text" id="showingName" class="form-input" placeholder="Your name" style="margin-bottom:10px;">
-              <input type="email" id="showingEmail" class="form-input" placeholder="Email" style="margin-bottom:10px;">
-              <input type="tel" id="showingPhone" class="form-input" placeholder="Phone" style="margin-bottom:10px;">
-              <textarea id="showingMsg" class="form-input form-textarea" style="min-height:100px;" placeholder="How can Rajivan help you?">I'd like to schedule a showing for the property located at <%= addr %>.</textarea>
+            <div style="display: flex; flex-direction: column; gap: 12px; margin-bottom: 20px; width: 100%;">
+              <input type="text" id="showingName" class="form-input" placeholder="Your name" style="width: 100%; box-sizing: border-box; padding: 12px 16px; border: 1.5px solid var(--cream-dark); border-radius: 3px;">
+              <input type="email" id="showingEmail" class="form-input" placeholder="Email" style="width: 100%; box-sizing: border-box; padding: 12px 16px; border: 1.5px solid var(--cream-dark); border-radius: 3px;">
+              <input type="tel" id="showingPhone" class="form-input" placeholder="Phone" style="width: 100%; box-sizing: border-box; padding: 12px 16px; border: 1.5px solid var(--cream-dark); border-radius: 3px;">
+              <textarea id="showingMsg" class="form-input form-textarea" style="width: 100%; min-height: 110px; box-sizing: border-box; resize: vertical; padding: 12px 16px; border: 1.5px solid var(--cream-dark); border-radius: 3px;" placeholder="How can Rajivan help you?">I'd like to schedule a showing for the property located at <%= addr %>.</textarea>
             </div>
-            <button id="showingBtn" class="btn btn-primary" style="width:100%;" onclick="submitShowingRequest()">Request Showing</button>
+
+            <button id="showingBtn" class="btn btn-primary" style="display: flex; align-items: center; justify-content: center; width: 100%; box-sizing: border-box; padding: 14px 0;" onclick="submitShowingRequest()">
+              Request Showing
+            </button>
           </div>
-          <div style="margin-top:16px;text-align:center;">
-            <a href="/home-valuation" style="font-size:12px;color:var(--gold);letter-spacing:0.05em;">Get a Free Home Valuation →</a>
+          
+          <div style="margin-top: 20px; text-align: center; width: 100%;">
+            <a href="/home-valuation" style="font-family: var(--font-body); font-size: 12px; color: var(--gold); letter-spacing: 0.05em; font-weight: 600; text-decoration: none;">
+              Get a Free Home Valuation &rarr;
+            </a>
           </div>
         </div>
+
       </div>
     </div>
   </section>
